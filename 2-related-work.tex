@@ -41,7 +41,9 @@ Image translation treats the image as outputs and the purpose of changing the im
 Pix2pix\upcite{pix2pix} uses the U-Net network, L1 Loss and PatchGAN classifiers.
 In the generator, U-Net combines Encoder with Decoder,
     reducing the pressure on each network layer and retaining more image information.
-In the discriminator they use L1 Loss to globally constrain the image, and for image localization, PatchGAN constructs constraints on the input.
+In the discriminator they use L1 Loss to globally constrain the image.
+In the partial adjustment of the image,
+    they use PatchGAN to discriminate image so that improve the quality of image.
 Therefore, each layer of convolution convolution combines the local characteristics of the corresponding layer before convolution,
     and pix2pix\upcite{pix2pix} can generate images better.
 CycleGAN\upcite{cyclegan} uses two generators and two discriminators to train separately achieving image conversion between the two attribute domains.
