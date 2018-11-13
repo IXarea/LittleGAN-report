@@ -3,6 +3,7 @@
 In order to achieve the purpose of efficiently generating high-quality faces that meet the needs of people, on one hand,
     it is necessary to properly handle the input and still maintain some features of the original image after adjusting the specific attributes of the face image for multiple times.
 On the other hand, train faces to get a more efficient model.
+
 With the development of machine learning, there are related researches on face synthesis in computer research.
 Below we briefly introduce related work at home and abroad.
 
@@ -36,7 +37,7 @@ Pix2pixHD\upcite{pix2pixhd} uses multiple discriminators to discriminating image
 \subsection{Facial Image Adjustment}
 
 \paragraph{Image Translation}
-
+Image generation is the basis of facial image generation.
 Image translation treats the image as outputs and the purpose of changing the image attributes is achieved by converting the attributes(or domains).
 Pix2pix\upcite{pix2pix} uses the U-Net network, L1 Loss and PatchGAN classifiers.
 In the generator, U-Net combines Encoder with Decoder,
@@ -58,12 +59,12 @@ StarGAN\upcite{stargan} trains across data sets so that the model can learn attr
     and can generate images by specifying more attributes.
 AttGAN\upcite{attgan} extracts the attributes and latent vectors of the image,
     changes the attributes and combines the latent vectors to generate an image,
-    thus realizing the adjustment of the image. However,
-    this model is huge and difficult to train.
-Apart from that, it is too expensive to deploy and operate.Addtionally,
-    the process of extracting the latent vector would cause information loss.
+    thus realizing the adjustment of the image.
+However, this model is huge and difficult to train.
+Apart from that, it is too expensive to deploy and operate.
+Addtionally, the process of extracting the latent vector would cause information loss.
 So some features of the original image will be lost in the new image.
-The research on multi-angle transformation of facial images is mainly based on the generation of positive faces based on the human face. 
+The research on multi-angle transformation of facial images is mainly based on the generation of positive faces based on the human face.
 The main method of this research is to build a face frame and then generate details.
 Taking TPGAN\upcite{tpgan} as an example, TPGAN\upcite{tpgan} uses a variety of Loss,
     which not only achieves the multi-angle transformation of the face,
@@ -74,9 +75,9 @@ Taking TPGAN\upcite{tpgan} as an example, TPGAN\upcite{tpgan} uses a variety of 
 From the above analysis of the current situation,
     we can learn that the current facial image generation and face image adjustment in the face research are generally separated.
 Also, different models are required to be used.
-Moreover, the image attribute extraction process need to be through different models. 
+Moreover, the image attribute extraction process need to be through different models.
 The conversion of the model is likely to cause certain information loss.
 Therefore, we hope to use a model to complete the two tasks of face image generation and face image adjustment so that not only the network layer parameters of the extracted image features can be shared,
-    but also the time and power consumption in the training model can be reduced. 
+    but also the time and power consumption in the training model can be reduced.
 During the generation and adjustment process, the attribute parameters are unified,
     avoiding the extra consumption caused by the conversion between different models.
