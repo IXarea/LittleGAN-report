@@ -8,5 +8,5 @@
 *.toc
 *.out
 *.fdb_latexmk
-
+Thumbs.db
 !figures/*.pdf
