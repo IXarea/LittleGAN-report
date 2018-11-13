@@ -8,3 +8,5 @@
 *.toc
 *.out
 *.fdb_latexmk
+
+!figures/*.pdf
