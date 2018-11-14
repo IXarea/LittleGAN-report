@@ -179,15 +179,62 @@ Since the discriminator not only outputs whether the image is from the real worl
 We expect the discriminator to be as close as possible to the true image discrimination result as close as 0.98,
     and the discriminant result from the generator image is as close as possible to 0.02.
 Similarly, it is desirable that the facial attribute information output by the discriminator is as consistent as possible with the real data.
-Equation 1, Equation 2, and Equation 3 are the GAN loss and conditional judgment loss of the discriminator, respectively.
+Equation \eqref{loss_d_gan}, Equation \eqref{loss_d_a}, and Equation \eqref{loss_d} are the GAN loss, conditional adjustment loss and total loss of the discriminator, respectively.
 
-We add an average absolute error to the generator's loss function expecting the model to make the overall color and layout of the generated image more realistic with the diversity of GAN's generation results.
+
+\begin{equation}
+    Loss_{D-GAN}(D,G)=
+    \mathbb{E}_{y\thicksim P(data)}[(0.98-D(y))^2]+
+    \mathbb{E}_{c,z\thicksim P(fake)}[D(G(c,z))^2]
+    \label{loss_d_gan}
+\end{equation}
+
+
+\begin{equation}
+    Loss_{A}(A)=
+    \mathbb{E}_{c,y\thicksim P(data)}[(c-A(y))^2]
+    \label{loss_d_a}
+\end{equation}
+
+\begin{equation}
+    Loss_{D}(A,D,G)=
+    Loss_{D-GAN}(D,G)+
+    Loss_{A}(A)
+    \label{loss_d}
+\end{equation}
+
+We add an mean absolute error to the generator's loss function expecting the model to make the overall color and layout of the generated image more realistic with the diversity of GAN's generation results.
 We expect the result of the generator to make the discriminator result close to 0.98 as much as possible, which is consistent with the real image.
-Therefore, the loss function of the generator is divided into GAN loss and the average absolute error loss.
+Therefore, the loss function of the generator is divided into GAN loss and the mean absolute error loss.
+Equation \eqref{loss_g_gan}, Equation \eqref{loss_g_l1}, and Equation \eqref{loss_g} are the GAN loss, mean absolute error loss and total loss of the generator, respectively.
 The $\lambda$ in the total loss in the experiment is 0.02.
 
-Our goal is to minimize the loss function of the generator and the discriminator, so the optimization goal of the generator against the network is %todo change
+\begin{equation}
+    Loss_{G-GAN}(A,D,G)=
+    \mathbb{E}_{c,z\thicksim P(fake)}[(0.98-D(G(c,z)))^2]+
+    \mathbb{E}_{c,z\thicksim P(fake)}[(c-A(G(c,z)))^2]
+    \label{loss_g_gan}
+\end{equation}
 
+\begin{equation}
+    Loss_{G-L1}(G)=
+    \mathbb{E}_{c,y,z\thicksim P(data)}[|y-G(c,z)|]
+    \label{loss_g_l1}
+\end{equation}
+
+\begin{equation}
+    Loss_{G}(A,D,G)=
+    Loss_{G-GAN}(A,D,G)+
+    \lambda Loss_{G-L1}(G)
+    \label{loss_g}
+\end{equation}
+
+Our goal is to minimize the loss function of the generator and the discriminator, so the optimization goal of the generator against the network is Equation \eqref{gan_target}
+
+\begin{equation}
+    GAN^*=\arg \min_{A,D} \max_{G}Loss_{D}(A,D,G)+Loss_{G}(A,D,G)
+    \label{gan_target}
+\end{equation}
 
 
 \subsection{Auto-Encoder Network}
@@ -207,6 +254,27 @@ Figure \ref{net_auto-encoder} is the graph of generate network structure.
 
 In a auto-encoder network, the parameters of the decoder are independent of the decoder parameters in the GAN and the encoder parameters are shared with the GAN.
 We use GAN loss and absolute mean error as a loss function for the auto-encoder network.
+Equation \eqref{loss_u_gan}, Equation \eqref{loss_u_l1}, and Equation \eqref{loss_u} are the GAN loss, mean absolute error loss and total loss of the auto-encoder, respectively.
+
+\begin{equation}
+    Loss_{U-GAN}(A,D,U)=
+    \mathbb{E}_{c,y\thicksim P(data)}[(0.98-D(U(c,y)))^2]+
+    \mathbb{E}_{c,y\thicksim P(data)}[(c-A(U(c,z)))^2]
+    \label{loss_u_gan}
+\end{equation}
+
+\begin{equation}
+    Loss_{U-L1}(U)=
+    \mathbb{E}_{c,x,y\thicksim P(data)}[|y-U(c,z)|]
+    \label{loss_u_l1}
+\end{equation}
+
+\begin{equation}
+    Loss_{U}(A,D,U)=
+    Loss_{U-GAN}(A,D,U)+
+    \lambda Loss_{U-L1}(U)
+    \label{loss_u}
+\end{equation}
 
 \subsection{Model Training}
 There are two main improvements to the training method of the model:
