@@ -1,13 +1,17 @@
 \section{Conclusion and Discuss}
 \subsection{Research Conclusion}
-In this study, in order to obtain a smaller model, a smaller amount of training and running, and a model with good performance, we have carried out several experiments based on DCGAN\upcite{dcgan}. We finally proposed a facial image generation and adjustment model based on GAN\upcite{gan} and its training method. By adding a self-encoding network that shares some network layer parameters with GAN, the facial image adjustment in the image space with smaller information loss is realized. In the training aspect, we use the gradient penalty proposed in WGAN-GP\upcite{wgan-gp} and innovatively put forward The way of part training has basically achieved the research targets.
+In this study, in order to obtain a smaller model, a smaller amount of training and running, and a model with good performance, we have carried out several experiments based on DCGAN\upcite{dcgan}.
+We finally proposed a facial image generation and adjustment model based on GAN\upcite{gan} and its training method.
+By adding a self-encoding network that shares some network layer parameters with GAN, the facial image adjustment in the image space with smaller information loss is realized.
+In the training aspect, we use the gradient penalty proposed in WGAN-GP\upcite{wgan-gp} and innovatively put forward The way of part training has basically achieved the research targets.
 
 \subsection{Application}
 \subsubsection*{Searching for the target person}
-In daily life, in many cases, it is necessary to obtain an image of a specific person. 
-For example, to convey the portrait information of a stranger; to obtain an image in which the character is different from the state in the photo. 
+In daily life, in many cases, it is necessary to obtain an image of a specific person.
+For example, to convey the portrait information of a stranger; to obtain an image in which the character is different from the state in the photo.
 In the past, the general use are verbal descriptions and drawing sketches, which have poor real-time performance, high requirements for personnel and the information conveyed is not intuitive enough to be biased.
-Our model is small, requires less computing equipment and produces images that are closer to real-world images. It can be easily deployed in mobile devices to better improve this reality.
+Our model is small, requires less computing equipment and produces images that are closer to real-world images.
+It can be easily deployed in mobile devices to better improve this reality.
 \subsubsection*{Extend the data set}
 Most of today's machine learning relies on a large amount of data, while in reality there is less data tagged and tagging costs are high.
 Using our model, we can extend the data set so that machine learning can get more data for training, verification and testing to get a better model.
@@ -18,7 +22,9 @@ We believe that using this model can meet the above personalized needs at a lowe
 \subsection{Prospect}
 \subsubsection*{Improve performance with more cutting edge technologies}
 
-In our pre-study stage, we tried to add a residual layer to the model. Such an adjustment can make the front network layer of the deep neural network better trained. But this led to the failure of the model training during the test, in that case, we eventually abandoned the improvement.
+In our pre-study stage, we tried to add a residual layer to the model.
+Such an adjustment can make the front network layer of the deep neural network better trained.
+But this led to the failure of the model training during the test, in that case, we eventually abandoned the improvement.
 We will next delve into the reasons and apply more new technologies to improve model performance.
 
 
@@ -30,10 +36,13 @@ Therefore, we will use the method proposed in StarGAN\upcite{stargan}, which use
 
 \subsubsection*{More HD images}
 Due to data set limitations, the images used for training have lower resolution in our experiments.
-Therefore, the image resolution of our model output is also lower. In a later improvement, we will try to use a higher resolution tagged facial dataset, for example, CelebA-HQ\upcite{pix2pixhd}, to train with a higher performance server for a higher resolution model.
+Therefore, the image resolution of our model output is also lower.
+In a later improvement, we will try to use a higher resolution tagged facial dataset, for example, CelebA-HQ\upcite{pix2pixhd}, to train with a higher performance server for a higher resolution model.
 \subsubsection*{Using natural language as a conditional input}
 Since we did not find the natural language description data set of the facial image when we started this research, we canceled the plan to design the facial image generation and adjustment model with natural language as the input condition.
-Next, we will try to create a natural language description dataset of the facial image. The dataset will be to design and train a model of facial image generation and adjustment with natural language input, further reducing the requirements of our model for users. Make it easier for users to generate images.
+Next, we will try to create a natural language description dataset of the facial image.
+The dataset will be to design and train a model of facial image generation and adjustment with natural language input, further reducing the requirements of our model for users.
+Make it easier for users to generate images.
 \subsubsection*{Migration model applied to more fields}
 The model we design in this study is to provide a solution to the needs of facial image generation and adjustment that is more suitable for the production environment.
 While the improved method we proposed in the study can also be applied to more fields than facial image generation.
@@ -41,7 +50,11 @@ We hope to transfer and apply the results and experiences gained in our research
 
 \vspace{4ex}
 
-We opened and published the model and training with test source code produced during the research process on the GitHub website at https://github.com/ixarea/ourgan. We are and will continue to conduct in-depth research and further improve and perfect the model, such as improving the performance of the model, expanding the applicable field of the model and improving the supporting procedures of the model. We believe that with our efforts and the help of the open source community, this research project will enable image generation and adjustment to enter people's production and life so that everyone can have a more convenient life in the era of machine learning.
+We opened and published the model and training with test source code produced during the research process on the GitHub website at https://github.com/ixarea/ourgan.
+We are and will continue to conduct in-depth research and further improve and perfect the model,
+    such as improving the performance of the model, expanding the applicable field of the model and improving the supporting procedures of the model.
+We believe that with our efforts and the help of the open source community,
+    this research project will enable image generation and adjustment to enter people's production and life so that everyone can have a more convenient life in the era of machine learning.
 
 
 

@@ -19,7 +19,8 @@ In the previous model adjustments, we conducted several comparative tests to sel
 hyperparameters.
 
 Figure \ref{norm_bach} and Figure \ref{norm_instance} show the results of the model after two epochs (about 5500 iterations per epoch) using batch normalization and instance normalization respectively.
-It can be seen that the image quality is under the same training amount after instance normalization. There is a certain improvement, which means that the convergence speed of the model is faster.
+It can be seen that the image quality is under the same training amount after instance normalization.
+There is a certain improvement, which means that the convergence speed of the model is faster.
 
 \begin{figure}
     \begin{center}
@@ -38,8 +39,8 @@ It can be seen that the image quality is under the same training amount after in
 \end{figure}
 
 In addition, we tested the effects of convolution kernel size and number of convolution filters on model performance and model volume.
- Fig. \ref{conv_filter_16}, Fig. \ref{conv_filter_24}, and Fig. \ref{conv_filter_32} are convolution filters using 16 times, 24 times, and 32 times, respectively and the output results are completed after 15 epochs. 
-It can be seen that after the number of convolution filters is lowered, the image quality does not decrease markedly under the same training amount. 
+Fig.\ref{conv_filter_16}, Fig.\ref{conv_filter_24}, and Fig.\ref{conv_filter_32} are convolution filters using 16 times, 24 times, and 32 times, respectively and the output results are completed after 15 epochs.
+It can be seen that after the number of convolution filters is lowered, the image quality does not decrease markedly under the same training amount.
 In order to reduce the volume of the model to achieve the purpose of reducing the cost of use, we finally chose a 16 times the number of convolution filters.
 
 \begin{figure}
