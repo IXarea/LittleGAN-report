@@ -10,3 +10,4 @@
 *.fdb_latexmk
 Thumbs.db
 !figures/*.pdf
+*.bak
