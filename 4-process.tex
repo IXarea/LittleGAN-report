@@ -66,7 +66,25 @@ In order to reduce the volume of the model to achieve the purpose of reducing th
     \end{center}
 \end{figure}
 
-Figures 10 and 11 show the results of the fourth epoch of the convolution kernel (or transposed convolution kernel) of 5 × 5 size and 3 × 3 size, respectively, under a 16-fold number convolution filter. It can be seen that switching from a 5×5 size convolution kernel to a 3×3 size, the image quality is degraded within an acceptable range, so we chose a 3×3 size convolution kernel.
+Figure \ref{conv_kernel_5} and \ref{conv_kernel_3} show the results of the fourth epoch of the convolution kernel (or transposed convolution kernel) of 5×5 size and 3×3 size,
+    respectively, under a 16-fold number convolution filter.
+It can be seen that switching from a 5×5 size convolution kernel to a 3×3 size,
+    the image quality is degraded within an acceptable range, so we chose a 3×3 size convolution kernel.
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[width=0.48\textwidth]{figures/result_conv_kernel_5.png}
+    \caption{Test result using 5×5 size convolution kernel after 4 epoch}
+    \label{conv_kernel_5}
+    \end{center}
+\end{figure}
+\begin{figure}
+    \begin{center}
+    \includegraphics[width=0.48\textwidth]{figures/result_conv_kernel_3.png}
+    \caption{Test result using 3×3 size convolution kernel after 4 epoch}
+    \label{conv_kernel_3}
+    \end{center}
+\end{figure}
 
 
 \subsection{Model Overview}
@@ -82,7 +100,7 @@ After the above research, we finally obtained the conditional facial image gener
     \end{center}
 \end{figure}
 
-The model consists of a generative confrontation network and a self-encoding network.
+The model consists of a generative confrontation network and a auto-encoder network.
 The main components in the network are the encoder and the decoder and the two networks share the network parameters of the encoder.
 In this model, the generator generates a facial image from the noise and face attribute conditions and then combines the original image with the new face attribute condition to obtain a new image by adjusting the network.
 
@@ -91,7 +109,7 @@ In this model, the generator generates a facial image from the noise and face at
 
 The main component encoder and decoder are used for the conversion of feature vectors and images.
 An encoder is used to extract features from an image.
-Using a convolution method, starting from an image of 128×128×3 (height×width×channels),
+Using a convolution method, starting from an image of 128×128×3 (height × width × channels),
     the convolution operation with step size is continuously performed to extract features while reducing the image dimension.After each convolution operation,
     normalization, activation, and Dropout\upcite{dropout} are performed in order to extract features from the image as a whole to the local.
 
@@ -124,6 +142,15 @@ After the second and fourth convolution, the feature map connected by the facial
     and then the image is generated from the global to the local by the decoder layer by layer.
 Finally a convolution operation with a step size of 1 and a filter number of 3 is performed and used.
 The tanh function is activated to obtain a three-channel color image of 128×128×3 size.
+Figure \ref{net_generator} is the graph of generate network structure.
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[width=0.48\textwidth]{figures/net_generator.png}
+    \caption{The Generator Network Structure of SmileGAN}
+    \label{net_generator}
+    \end{center}
+\end{figure}
 
 The top of the discriminator is an encoder that extracts the feature vector of 4×4×n size from the input image.
 Finally, the feature vectors are fully connected.
@@ -134,6 +161,15 @@ On the other hand, connected to the same dimension as the feature vector,
     the latent facial attribute information is extracted,
     and the result is also normalized to 0~1 using the Sigmoid activation function,
     thereby indicating the possibility that the image has these facial attributes.
+Figure \ref{net_discriminator} is the graph of generate network structure.
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[width=0.48\textwidth]{figures/net_discriminator.png}
+    \caption{The Discriminator Network Structure of SmileGAN}
+    \label{net_discriminator}
+    \end{center}
+\end{figure}
 
 For the discriminator loss, since the Sigmoid is used to activate the output,
     in order to ensure that the neuron parameters in the network layer are not too large or too small leading to model out of balance,
@@ -152,15 +188,25 @@ The $\lambda$ in the total loss in the experiment is 0.02.
 
 Our goal is to minimize the loss function of the generator and the discriminator, so the optimization goal of the generator against the network is %todo change
 
-2 and 3 are network structure diagrams of generators and discriminators in a generated confrontation network, respectively.
+
 
 \subsection{Auto-Encoder Network}
-The self-encoding network is composed of a decoder, an encoder, a plurality of shortcut channels and a combined channel of adjustment conditions.
+The auto-encoder network is composed of a decoder, an encoder, a plurality of shortcut channels and a combined channel of adjustment conditions.
 The network uses an encoder to extract features from the global to the detail layer by layer and transmits each layer feature to the decoder network through a shortcut channel so that each layer of the network does not need to carry all the information of the image.
-
 The network uses the decoder to combine the original features and adjustment conditions of the image from the detail to the global step by step to generate an image.
-In a self-encoding network, the parameters of the decoder are independent of the decoder parameters in the GAN and the encoder parameters are shared with the GAN.
-We use GAN loss and absolute mean error as a loss function for the self-coding network.
+
+Figure \ref{net_auto-encoder} is the graph of generate network structure.
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[width=0.48\textwidth]{figures/net_auto-encoder.png}
+    \caption{The Auto-Encoder Network Structure of SmileGAN}
+    \label{net_auto-encoder}
+    \end{center}
+\end{figure}
+
+In a auto-encoder network, the parameters of the decoder are independent of the decoder parameters in the GAN and the encoder parameters are shared with the GAN.
+We use GAN loss and absolute mean error as a loss function for the auto-encoder network.
 
 \subsection{Model Training}
 There are two main improvements to the training method of the model:
