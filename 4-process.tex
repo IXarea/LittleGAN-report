@@ -177,7 +177,7 @@ For the discriminator loss, since the Sigmoid is used to activate the output,
     we limit the loss of the discriminator output to 0.02~0.98.
 Since the discriminator not only outputs whether the image is from the real world but also contains the facial attribute information implied by the image,
     it includes the GAN loss and the conditional judgment loss.
-We expect the discriminator to be as close as possible to the true image discrimination result as close as 0.98,
+We expect the discriminator to be as close as possible to the true image discrimination result as close as 0.98.
 Similarly, it is desirable that the facial attribute information output by the discriminator is as consistent as possible with the real data.
 Equation \eqref{loss_d_gan}, Equation \eqref{loss_d_a}, and Equation \eqref{loss_d} are the GAN loss, conditional adjustment loss and total loss of the discriminator, respectively.
 

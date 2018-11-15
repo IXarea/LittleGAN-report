@@ -18,20 +18,20 @@ Based on DCGAN\upcite{dcgan}, they embed the text descriptions into words and co
 In StackGAN\upcite{stackgan}, the author also embeds the text description into the text feature vector,
     and initially generates the contour of the object,
     and further combines the text feature vector to generate higher resolution and more detailed images.
+    InfoGAN is able to extract attributes from images, enabling conditional generation of images and unsupervised learning.
 They also use different discriminators to identify images at different stages, thereby improving the quality of the image.
 
 
 \paragraph{Facial Image Generation}
 
 At present, there are several models related to the improvement of image generation quality,
-    such as BEGAN\upcite{began}, PGGAN\upcite{pggan}, and Pix2pixHD\upcite{pix2pixhd}.
+    such as BEGAN\upcite{began} and PGGAN\upcite{pggan}.
 BEGAN\upcite{began} uses a generator and a discriminator similar to the variational auto-encoding to improve the resolution of the image and the diversity of image generation by sequentially convolving the image,
     maintaining the stability of image generation.
 PGGAN\upcite{pggan} first trains low-resolution faces,
     and gradually increases the network layer for training,
     therefore improving the resolution of the model output image and the stability of the network.
-Pix2pixHD\upcite{pix2pixhd} uses multiple discriminators to discriminating images of different resolutions,
-    and finally combines features at different resolutions to generate high-resolution face images.
+
 
 
 \subsection{Facial Image Adjustment}
@@ -52,7 +52,7 @@ Whether it is pix2pix\upcite{pix2pix} or CycleGAN\upcite{cyclegan},
     although they can achieve the purpose of converting image attributes better,
     it is limited to two definite domains.
 If it is required to convert multiple attributes, multiple models are needed.
-In that case, the volume and the amount of calculation are too large to meet the actual needs of people.
+In that case, the size of the model and the amount of calculation are too large to meet the actual needs of people.
 
 \paragraph{Facial Image Adjustment}
 StarGAN\upcite{stargan} trains across data sets so that the model can learn attributes and features from multiple data sets,
@@ -60,6 +60,8 @@ StarGAN\upcite{stargan} trains across data sets so that the model can learn attr
 AttGAN\upcite{attgan} extracts the attributes and latent vectors of the image,
     changes the attributes and combines the latent vectors to generate an image,
     thus realizing the adjustment of the image.
+Pix2pixHD\upcite{pix2pixhd} uses multiple discriminators to discriminating images of different resolutions,
+    and finally combines features at different resolutions to generate high-resolution face images.
 However, this model is huge and difficult to train.
 Apart from that, it is too expensive to deploy and operate.
 Addtionally, the process of extracting the latent vector would cause information loss.
