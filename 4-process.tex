@@ -1,7 +1,8 @@
 \section{Process}
 \subsection{Overall Roadmap}
 
-In order to obtain a smaller model, less training and running with better performance, we decided to make multiple models and training improvements based on DCGAN\upcite{dcgan} and improve it through multiple sets of experiments.
+In order to obtain a smaller model, less training and running with better performance,
+we decided to make multiple models and training improvements based on DCGAN\upcite{dcgan} and improve it through multiple sets of experiments.
 Figure \ref{roadmap} is the overall technical roadmap for this study.
 
 \begin{figure}
@@ -15,8 +16,7 @@ Figure \ref{roadmap} is the overall technical roadmap for this study.
 
 \subsection{Research Process}
 
-In the previous model adjustments, we conducted several comparative tests to select suitable
-hyperparameters.
+In the previous model adjustments, we conducted several comparative tests to select suitable hyperparameters.
 
 Figure \ref{norm_bach} and Figure \ref{norm_instance} show the results of the model after two epochs (about 5500 iterations per epoch) using batch normalization and instance normalization respectively.
 It can be seen that the image quality is under the same training amount after instance normalization.
@@ -102,7 +102,7 @@ After the above research, we finally obtained the conditional facial image gener
 
 The model consists of a generative confrontation network and a auto-encoder network.
 The main components in the network are the encoder and the decoder and the two networks share the network parameters of the encoder.
-In this model, the generator generates a facial image from the noise and face attribute conditions and then combines the original image with the new face attribute condition to obtain a new image by adjusting the network.
+In this model, the generator generates a facial image from the noise and facial attribute and then combines the original image with the new facial attribute to obtain a new image by adjusting the network.
 
 
 \subsection{Decoder and Encoder}
