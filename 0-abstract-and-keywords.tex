@@ -1,26 +1,32 @@
 \begin{abstract}
-Nowadays, generating faces and face image editing have been a significant and worthy topic whether in science research or utilization.
-However, due to the huge size of models as well as the high cost of distributing and running models, 
-    machine-learning models of generating faces and face image editing have rarely been applied to actual production activity.
 
-As a result, our research tried to use and improve the developing Generative Adversarial Networks (GAN)\upcite{gan},
-    aiming to decrease the size of the model and declare the cost of training as well as running the model, along with fine performance.
-Through a large scale of experiments,
-    we propose "One Generative Adversarial Network for facial generation and adjustment",
-    which is a multi-task network, able to achieve functions including facial attribute identification,
-    conditional facial image generation and adjustment by combining attributes.
+In daily life, it is necessary to get specific persons' images on various occasions.
+For example, pass the portrait information of strangers and get an image of a person different from the state in picture.
+As usual, oral description or drawing sketch map are generally adopted,
+    which has poor real-time performance, high requirements for users,
+    passing information not intuitive and easy leading to deviation.
+Nowadays, machine learning grows fast.
+It makes it significant to use machine learning to meet the need of facial image generation and adjustment whether in technical research or practical application.
+However, due to the huge size of models as well as the high training, deployment, and running use-cost,
+    machine-learning models of facial image generation and adjustment have rarely been applied to production activity.
+As a result, our research tried to use and improve the developing Generative Adversarial Networks(GAN)\cite{gan},
+    aiming to reduce the model size so that the computational load in training and runtime is cut down,
+    along with fine performance. 
 
+Through a large scale of experiments, we propose "Single model for facial generation and adjustment",
+    which is a multi-task model, able to achieve functions including facial attribute identification, 
+    conditional facial image generation and adjustment.
 In this work, we develop a model based on DCGAN\upcite{dcgan},
     inspired by pix2pix\upcite{pix2pix} and PGGAN\upcite{pggan}.
 Major improvements are as follows.
-We share parameters between auto-encoder network and GAN partly in the network,
-    reducing the size of the model and the cost of training compared to two individual models.
+We share parameters between auto-encoder and part of GAN,
+    reducing the size of the model and use-cost compared to two individual models.
 Aiming to reduce the loss of original image information, we adjust images in the image space.
-We also propose a method of part training, making it possible to train deeper network easily.
+We also propose a method of part training, making it possible to train deep network easily.
 
-It is validated that the model can validly generate plausible images of faces from attributes and be adjusted by the modified condition.
-Results also suggest that the cost of distributing and running models have declined compared to DCGAN\upcite{dcgan} and pix2pix\upcite{pix2pix},
-    which can be effectively applied to the actual production activity.
+It is validated that the model can validly generate plausible images of faces from attributes and be adjusted by the certain condition.
+Results also suggest that the use-cost of models have declined compared to DCGAN\upcite{dcgan} and pix2pix\upcite{pix2pix},
+    which can be effectively applied to the actual production activity. 
 
 \begin{IEEEkeywords}
     Facial Image Generation, Facial Image Adjustment, Generative Adversarial Networks, Machine Learning
