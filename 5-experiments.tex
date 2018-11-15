@@ -58,8 +58,32 @@ It can be seen that the loss of the generator reaches the balance faster after t
 Figure 25 and Figure 26 show the test output of the part training on and off, respectively.
 The end of the 20th round of the generated image can also be seen that after the part training is started, the image quality will be improved under the same training amount.
 
+\begin{figure}
+    \begin{minipage}[t]{0.48\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/result_part_off.png}
+        \caption{Test result turn on part training after 20 epoch}
+        \label{part_off}
+    \end{minipage}
+        \hfill
+    \begin{minipage}[t]{0.48\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/result_part_on.png}
+        \caption{Test result turn off part training after 20 epoch}
+        \label{part_on}
+    \end{minipage}
+\end{figure}
+
 \subsubsection*{Lower cost of the model}
 We use a variety of methods to reduce the size of the model and reduce the amount of computation.
-We compare the model volume of pix2pix\upcite{pix2pix}, DCGAN\upcite{dcgan} and our model when outputting the same size image (a three-channel color image of 128 × 128 pixels).
-(As shown in Figure 27).
-It can be seen that our model is smaller and cost less.
+We compare the model size of pix2pix\upcite{pix2pix}, DCGAN\upcite{dcgan} and SmileGAN when outputting the same size image (a three-channel color image of 128 × 128 pixels).
+(As shown in Figure \ref{result_model_size}).
+It can be seen that the size of SmileGAN is smaller and SmileGAN costs less.
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[width=\textwidth]{figures/result_model_size.png}
+    \caption{Model Size Comparison}
+    \label{result_model_size}
+    \end{center}
+\end{figure}

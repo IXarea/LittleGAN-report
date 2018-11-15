@@ -6,7 +6,7 @@ Figure \ref{roadmap} is the overall technical roadmap for this study.
 
 \begin{figure}
     \begin{center}
-    \includegraphics[width=0.48\textwidth]{figures/roadmap.pdf}
+    \includegraphics[width=\textwidth]{figures/roadmap.pdf}
     \caption{Overall technical Roadmap}
     \label{roadmap}
     \end{center}
@@ -23,48 +23,46 @@ It can be seen that the image quality is under the same training amount after in
 There is a certain improvement, which means that the convergence speed of the model is faster.
 
 \begin{figure}
-    \begin{center}
-    \includegraphics[width=0.48\textwidth]{figures/result_norm_batch.png}
-    \caption{Test result using Batch Normalization after 2 epoch}
-    \label{norm_bach}
-    \end{center}
+    \begin{minipage}[t]{0.48\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/result_norm_batch.png}
+        \caption{Test result using Batch Normalization after 2 epoch}
+        \label{norm_bach}
+    \end{minipage}
+        \hfill
+    \begin{minipage}[t]{0.48\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/result_norm_instance.png}
+        \caption{Test result using Instance Normalization after 2 epoch}
+        \label{norm_instance}
+    \end{minipage}
 \end{figure}
 
-\begin{figure}
-    \begin{center}
-    \includegraphics[width=0.48\textwidth]{figures/result_norm_instance.png}
-    \caption{Test result using Instance Normalization after 2 epoch}
-    \label{norm_instance}
-    \end{center}
-\end{figure}
-
-In addition, we tested the effects of convolution kernel size and number of convolution filters on model performance and model volume.
+In addition, we tested the effects of convolution kernel size and number of convolution filters on model performance and model size.
 Fig.\ref{conv_filter_16}, Fig.\ref{conv_filter_24}, and Fig.\ref{conv_filter_32} are convolution filters using 16 times, 24 times, and 32 times, respectively and the output results are completed after 15 epochs.
 It can be seen that after the number of convolution filters is lowered, the image quality does not decrease markedly under the same training amount.
-In order to reduce the volume of the model to achieve the purpose of reducing the cost of use, we finally chose a 16 times the number of convolution filters.
+In order to reduce the size of the model to achieve the purpose of reducing the cost of use, we finally chose a 16 times the number of convolution filters.
 
 \begin{figure}
-    \begin{center}
-    \includegraphics[width=0.48\textwidth]{figures/result_conv_filter_16.png}
-    \caption{Test result using 16x convolution filter after 15 epoch}
-    \label{conv_filter_16}
-    \end{center}
-\end{figure}
-
-\begin{figure}
-    \begin{center}
-    \includegraphics[width=0.48\textwidth]{figures/result_conv_filter_24.png}
-    \caption{Test result using 24x convolution filter after 15 epoch}
-    \label{conv_filter_24}
-    \end{center}
-\end{figure}
-
-\begin{figure}
-    \begin{center}
-    \includegraphics[width=0.48\textwidth]{figures/result_conv_filter_32.png}
-    \caption{Test result using 32x convolution filter after 15 epoch}
-    \label{conv_filter_32}
-    \end{center}
+    \begin{minipage}[t]{0.48\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/result_conv_filter_16.png}
+        \caption{Test result using 16x convolution filter after 15 epoch}
+        \label{conv_filter_16}
+    \end{minipage}
+        \hfill
+    \begin{minipage}[t]{0.48\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/result_conv_filter_24.png}
+        \caption{Test result using 24x convolution filter after 15 epoch}
+        \label{conv_filter_24}
+    \end{minipage}
+    \begin{minipage}[t]{\linewidth}
+        \centering
+        \includegraphics[width=0.48\textwidth]{figures/result_conv_filter_32.png}
+        \caption{Test result using 32x convolution filter after 15 epoch}
+        \label{conv_filter_32}
+    \end{minipage}
 \end{figure}
 
 Figure \ref{conv_kernel_5} and \ref{conv_kernel_3} show the results of the fourth epoch of the convolution kernel (or transposed convolution kernel) of 5×5 size and 3×3 size,
@@ -73,18 +71,19 @@ It can be seen that switching from a 5×5 size convolution kernel to a 3×3 size
     the image quality is degraded within an acceptable range, so we chose a 3×3 size convolution kernel.
 
 \begin{figure}
-    \begin{center}
-    \includegraphics[width=0.48\textwidth]{figures/result_conv_kernel_5.png}
-    \caption{Test result using 5×5 size convolution kernel after 4 epoch}
-    \label{conv_kernel_5}
-    \end{center}
-\end{figure}
-\begin{figure}
-    \begin{center}
-    \includegraphics[width=0.48\textwidth]{figures/result_conv_kernel_3.png}
-    \caption{Test result using 3×3 size convolution kernel after 4 epoch}
-    \label{conv_kernel_3}
-    \end{center}
+    \begin{minipage}[t]{0.48\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/result_conv_kernel_5.png}
+        \caption{Test result using 5×5 size convolution kernel after 4 epoch}
+        \label{conv_kernel_5}
+    \end{minipage}
+        \hfill
+    \begin{minipage}[t]{0.48\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/result_conv_kernel_3.png}
+        \caption{Test result using 3×3 size convolution kernel after 4 epoch}
+        \label{conv_kernel_3}
+    \end{minipage}
 \end{figure}
 
 
@@ -95,7 +94,7 @@ After the above research, we finally obtained the conditional facial image gener
 
 \begin{figure}
     \begin{center}
-    \includegraphics[width=0.48\textwidth]{figures/model.pdf}
+    \includegraphics[width=\textwidth]{figures/model.pdf}
     \caption{The Model of SmileGAN}
     \label{smliegan}
     \end{center}
@@ -146,11 +145,19 @@ The tanh function is activated to obtain a three-channel color image of 128×128
 Figure \ref{net_generator} is the graph of generate network structure.
 
 \begin{figure}
-    \begin{center}
-    \includegraphics[width=0.48\textwidth]{figures/net_generator.pdf}
-    \caption{The Generator Network Structure of SmileGAN}
-    \label{net_generator}
-    \end{center}
+    \begin{minipage}[t]{0.48\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/net_generator.pdf}
+        \caption{The Generator Network Structure of SmileGAN}
+        \label{net_generator}
+    \end{minipage}
+        \hfill
+    \begin{minipage}[t]{0.48\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/net_discriminator.pdf}
+        \caption{The Discriminator Network Structure of SmileGAN}
+        \label{net_discriminator}
+    \end{minipage}
 \end{figure}
 
 The top of the discriminator is an encoder that extracts the feature vector of 4×4×n size from the input image.
@@ -164,13 +171,6 @@ On the other hand, connected to the same dimension as the feature vector,
     thereby indicating the possibility that the image has these facial attributes.
 Figure \ref{net_discriminator} is the graph of generate network structure.
 
-\begin{figure}
-    \begin{center}
-    \includegraphics[width=0.48\textwidth]{figures/net_discriminator.pdf}
-    \caption{The Discriminator Network Structure of SmileGAN}
-    \label{net_discriminator}
-    \end{center}
-\end{figure}
 
 For the discriminator loss, since the Sigmoid is used to activate the output,
     in order to ensure that the neuron parameters in the network layer are not too large or too small leading to model out of balance,
@@ -178,7 +178,6 @@ For the discriminator loss, since the Sigmoid is used to activate the output,
 Since the discriminator not only outputs whether the image is from the real world but also contains the facial attribute information implied by the image,
     it includes the GAN loss and the conditional judgment loss.
 We expect the discriminator to be as close as possible to the true image discrimination result as close as 0.98,
-    and the discriminant result from the generator image is as close as possible to 0.02.
 Similarly, it is desirable that the facial attribute information output by the discriminator is as consistent as possible with the real data.
 Equation \eqref{loss_d_gan}, Equation \eqref{loss_d_a}, and Equation \eqref{loss_d} are the GAN loss, conditional adjustment loss and total loss of the discriminator, respectively.
 
