@@ -10,7 +10,7 @@ We have investigated the research status and the related works at home and aboar
 %todo: Need to reconstruct
 \subsection{Facial Image Generation}
 
-\paragraph{Image Generation}
+\subsubsection*{Image Generation}
 
 Image generation is the basis of facial image generation.
 Text-to-Image\upcite{text2img} proposed the generation of texts to images earlier.
@@ -22,7 +22,7 @@ In StackGAN\upcite{stackgan}, the author also embeds the text description into t
 They also use different discriminators to identify images at different stages, thereby improving the quality of the image.
 
 
-\paragraph{Facial Image Generation}
+\subsubsection*{Facial Image Generation}
 
 At present, there are several models related to the improvement of image generation quality,
     such as BEGAN\upcite{began} and PGGAN\upcite{pggan}.
@@ -36,7 +36,7 @@ PGGAN\upcite{pggan} first trains low-resolution facial image,
 
 \subsection{Facial Image Adjustment}
 
-\paragraph{Image Translation}
+\subsubsection*{Image Translation}
 Image generation is the basis of facial image generation.
 Image translation treats the image as outputs and the purpose of changing the image attributes is achieved by converting the attributes(or domains).
 Pix2pix\upcite{pix2pix} uses the U-Net network, L1 Loss and PatchGAN classifiers.
@@ -54,7 +54,7 @@ Whether it is pix2pix\upcite{pix2pix} or CycleGAN\upcite{cyclegan},
 If it is required to convert multiple attributes, multiple models are needed.
 In that case, the size of the model and the amount of calculation are too large to meet the actual needs of people.
 
-\paragraph{Facial Image Adjustment}
+\subsubsection*{Facial Image Adjustment}
 StarGAN\upcite{stargan} trains across data sets so that the model can learn attributes and features from multiple data sets,
     and can generate images by specifying more attributes.
 AttGAN\upcite{attgan} extracts the attributes and latent vectors of the image,
