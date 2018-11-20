@@ -4,7 +4,7 @@
 %     it is necessary to properly handle the input and still maintain some features of the original image after adjusting the specific attributes of the face image for multiple times.
 % On the other hand, train faces to get a more efficient model.
 
-With the development of machine learning, there are related researches on facial image.
+With the development of machine learning, there are related research on facial image.
 We have investigated the research status and the related works at home and aboard.
 
 %todo: Need to reconstruct
@@ -14,7 +14,7 @@ We have investigated the research status and the related works at home and aboar
 
 Image generation is the basis of facial image generation.
 Text-to-Image\upcite{text2img} proposed the generation of texts to images earlier.
-Based on DCGAN\upcite{dcgan}, they embed the text descriptions into words and combine them with noise vectors to generate images through convolution operations.
+Based on DCGAN\upcite{dcgan}, they embed the text descriptions into words and combine them with latent vectors to generate images through convolution operations.
 In StackGAN\upcite{stackgan}, the author also embeds the text description into the text feature vector,
     and initially generates the contour of the object,
     and further combines the text feature vector to generate higher resolution and more detailed images.
@@ -75,7 +75,7 @@ Taking TPGAN\upcite{tpgan} as an example, TPGAN\upcite{tpgan} uses a variety of 
 \vspace{3ex}
 
 From the above analysis of the current situation,
-    we can learn that the current facial image generation and facial image adjustment in the face research are generally separated.
+    we can learn that the current facial image generation and facial image adjustment in the face research are generally separate.
 Also, different models are required to be used.
 Moreover, the image attribute extraction process need to be through different models.
 The conversion of the model is likely to cause certain information loss.

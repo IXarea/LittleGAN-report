@@ -18,9 +18,8 @@ Figure \ref{roadmap} is the overall technical roadmap for this study.
 
 In the previous model adjustments, we conducted several comparative tests to select suitable hyperparameters.
 
-Figure \ref{norm_bach} and Figure \ref{norm_instance} show the results of the model after two epochs (about 5500 iterations per epoch) using batch normalization and instance normalization respectively.
-It can be seen that the image quality is under the same training amount after instance normalization.
-There is a certain improvement, which means that the convergence speed of the model is faster.
+Figure \ref{norm_bach} and Figure \ref{norm_instance} show the results of the model after 2 epochs (about 5500 iterations per epoch) using batch normalization and instance normalization respectively.
+It can be seen that the image quality is improved under the same training amount after using instance normalization, which means that the convergence speed of the model is faster.
 
 \begin{figure}
     \begin{minipage}[t]{0.48\linewidth}
@@ -65,7 +64,7 @@ In order to reduce the size of the model to achieve the purpose of reducing the 
     \end{minipage}
 \end{figure}
 
-Figure \ref{conv_kernel_5} and \ref{conv_kernel_3} show the results of the fourth epoch of the convolution kernel (or transposed convolution kernel) of 5×5 size and 3×3 size,
+Figure \ref{conv_kernel_5} and \ref{conv_kernel_3} show the results after 4 epoch of the convolution kernel (or transposed convolution kernel) of 5×5 size and 3×3 size,
     respectively, under a 16-fold number convolution filter.
 It can be seen that switching from a 5×5 size convolution kernel to a 3×3 size,
     the image quality is degraded within an acceptable range, so we chose a 3×3 size convolution kernel.
@@ -89,7 +88,7 @@ It can be seen that switching from a 5×5 size convolution kernel to a 3×3 size
 
 \subsection{Model Overview}
 
-After the above research, we finally obtained the conditional facial image generation and adjustment model based on GAN\upcite{gan},
+After the research above, we finally obtained the conditional facial image generation and adjustment model based on GAN\upcite{gan},
     which is a method of facial image generation and adjustment using machine learning (as shown in Figure \ref{smliegan}).
 
 \begin{figure}
@@ -137,7 +136,7 @@ The discriminator consists of an encoder and a fully connected layer at the bott
     and extracts features by convolution and combines them.
 The condition determines whether the image comes from the real world and extracts the facial attribute information implied by the image.
 
-The top of the generator is a fully connected network that joins the input facial attribute conditions and the noise (implicit vector) that conform to the normal distribution into a 4×4×n layer feature map.
+The top of the generator is a fully connected network that joins the input facial attribute conditions and the latent vector that conform to the normal distribution into a 4×4×n layer feature map.
 After the second and fourth convolution, the feature map connected by the facial attribute condition parameter is added,
     and then the image is generated from the global to the local by the decoder layer by layer.
 Finally a convolution operation with a step size of 1 and a filter number of 3 is performed and used.
@@ -252,7 +251,7 @@ Figure \ref{net_auto-encoder} is the graph of generate network structure.
     \end{center}
 \end{figure}
 
-In a auto-encoder network, the parameters of the decoder are independent of the decoder parameters in the GAN and the encoder parameters are shared with the GAN.
+In an auto-encoder network, the parameters of the decoder are independent of the decoder parameters in the GAN and the encoder parameters are shared with the GAN.
 We use GAN loss and absolute mean error as a loss function for the auto-encoder network.
 Equation \eqref{loss_u_gan}, Equation \eqref{loss_u_l1}, and Equation \eqref{loss_u} are the GAN loss, mean absolute error loss and total loss of the auto-encoder, respectively.
 
