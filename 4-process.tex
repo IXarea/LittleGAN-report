@@ -94,7 +94,7 @@ After the research above, we finally obtained the conditional facial image gener
 \begin{figure}
     \begin{center}
     \includegraphics[width=\textwidth]{figures/model.pdf}
-    \caption{The Model of SmileGAN}
+    \caption{The Model of LittleGAN}
     \label{smliegan}
     \end{center}
 \end{figure}
@@ -147,14 +147,14 @@ Figure \ref{net_generator} is the graph of generate network structure.
     \begin{minipage}[t]{0.48\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/net_generator.pdf}
-        \caption{The Generator Network Structure of SmileGAN}
+        \caption{The Generator Network Structure of LittleGAN}
         \label{net_generator}
     \end{minipage}
         \hfill
     \begin{minipage}[t]{0.48\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/net_discriminator.pdf}
-        \caption{The Discriminator Network Structure of SmileGAN}
+        \caption{The Discriminator Network Structure of LittleGAN}
         \label{net_discriminator}
     \end{minipage}
 \end{figure}
@@ -246,7 +246,7 @@ Figure \ref{net_auto-encoder} is the graph of generate network structure.
 \begin{figure}
     \begin{center}
     \includegraphics[width=0.48\textwidth]{figures/net_auto-encoder.pdf}
-    \caption{The Auto-Encoder Network Structure of SmileGAN}
+    \caption{The Auto-Encoder Network Structure of LittleGAN}
     \label{net_auto-encoder}
     \end{center}
 \end{figure}
@@ -278,10 +278,10 @@ Equation \eqref{loss_u_gan}, Equation \eqref{loss_u_l1}, and Equation \eqref{los
 \subsection{Model Training}
 There are two main improvements to the training method of the model:
     applying the gradient penalty proposed in WGAN-GP\upcite{wgan-gp} to the discriminator to improve the convergence speed of the model training and the stability of the model;
-    using the part training that proposed by us enables the network to adjust the previous network layer more effectively and speed up the convergence.
+    using the partition training that proposed by us enables the network to adjust the previous network layer more effectively and speed up the convergence.
 
-The specific operation of the part training proposed by us is as follows: the network layer parameters that need to be trained in the model are grouped according to the function and the number of parameters.
+The specific operation of the partition training proposed by us is as follows: the network layer parameters that need to be trained in the model are grouped according to the function and the number of parameters.
 When training each group of parameters, other parameters are fixed and only the parameters in the group are back-propagated.
-In practice, for the overall effect of the model, we generally cross the overall model training and part training in a certain proportion.
+In practice, for the overall effect of the model, we generally cross the overall model training and partition training in a certain proportion.
 We set up separate optimizers for each set of parameters.
 Although this will take up more memory for the training device, it can reduce the CPU's burden that the optimizer frequently switches the optimization target and reconstructs the model.
