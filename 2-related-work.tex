@@ -1,20 +1,12 @@
 \section{Related Work}
 
-% In order to achieve the purpose of efficiently generating high-quality faces that meet the needs of people, on one hand,
-%     it is necessary to properly handle the input and still maintain some features of the original image after adjusting the specific attributes of the face image for multiple times.
-% On the other hand, train faces to get a more efficient model.
-
-With the development of machine learning, there are related research on facial image.
-We have investigated the research status and the related works at home and aboard.
-
-%todo: Need to reconstruct
 \subsection{Facial Image Generation}
 
 \subsubsection*{Image Generation}
 
 Image generation is the basis of facial image generation.
 Text-to-Image\upcite{text2img} proposed the generation of texts to images earlier.
-Based on DCGAN\upcite{dcgan}, they embed the text descriptions into words and combine them with latent vectors to generate images through convolution operations.
+Based on DCGAN\upcite{dcgan}, they embed the text descriptions into words and combine them with latent vectors to generate images through convolution.
 In StackGAN\upcite{stackgan}, the author also embeds the text description into the text feature vector,
     and initially generates the contour of the object,
     and further combines the text feature vector to generate higher resolution and more detailed images.
@@ -63,7 +55,7 @@ AttGAN\upcite{attgan} extracts the attributes and latent vectors of the image,
 Pix2pixHD\upcite{pix2pixhd} uses multiple discriminators to discriminating images of different resolutions,
     and finally combines features at different resolutions to generate high-resolution facial images.
 However, this model is huge and difficult to train.
-Apart from that, it is too expensive to deploy and operate.
+Apart from that, it is too expensive to deploy and run.
 Addtionally, the process of extracting the latent vector would cause information loss.
 So some features of the original image will be lost in the new image.
 The research on multi-angle transformation of facial images is mainly to generate positive face under the side one.

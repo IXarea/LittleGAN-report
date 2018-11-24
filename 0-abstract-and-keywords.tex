@@ -1,31 +1,23 @@
 \begin{abstract}
 
-In daily life, it is necessary to get specific persons' images on various occasions.
-For example, pass the portrait information of strangers and get an image of a person different from the state in picture.
-As usual, oral description or drawing sketch map are generally adopted,
-    which has poor real-time performance, high requirements for users,
-    passing information not intuitive and easy leading to deviation.
-Nowadays, machine learning grows fast.
-It makes it significant to use machine learning to meet the need of facial image generation and adjustment whether in technical research or practical application.
-However, due to the huge size of models as well as the high training, deployment, and running use-cost,
-    machine-learning models of facial image generation and adjustment have rarely been applied to production activity.
-As a result, our research tried to use and improve the development of Generative Adversarial Networks(GAN)\upcite{gan},
-    aiming to reduce the model size so that the computational load in training and runtime is cut down,
-    along with fine performance. 
-
-Through a large scale of experiments, we propose "Single model for facial generation and adjustment",
-    which is a multi-task model, capable of achieving functions including facial attribute identification, 
+In daily life, it is often necessary to pass portrait information.
+For example, obtaining images from eyewitness in public security.
+However, the traditional method has some disadvantages,
+    and existing machine learning model's use-cost is too high.
+Through a large scale of experiments, we propose single model for facial generation and adjustment,
+    which is a multi-task model, including facial attribute identification, 
     conditional facial image generation and adjustment.
-In this work, we develop a model based on DCGAN\upcite{dcgan},
-    inspired by pix2pix\upcite{pix2pix} and PGGAN\upcite{pggan}.
+In this work, we develop a model based on DCGAN,
+    inspired by pix2pix and PGGAN.
 Major improvements are as follows.
-We share parameters between auto-encoder and part of GAN,
+We share parameters between GAN and Adjustor,
     reducing the size of the model and use-cost compared to two individual models.
-Aiming to reduce the loss of original image information, we adjust images in the image space.
-We also propose a method of partition training, making it possible to train deep network easily.
-
-It is validated that the model can validly generate plausible images of faces from attributes and be adjusted by the certain condition.
-Results also suggest that the use-cost of models has declined compared to DCGAN\upcite{dcgan} and pix2pix\upcite{pix2pix},
+We adjust images in the image space,
+    reducing the loss of original image information.
+We propose a method of partition training,
+    making deep neural network easier to train.
+It is validated that the model can validly generate plausible images of faces from attributes and be adjusted by attribute.
+Results also suggest that the use-cost of models has declined compared to DCGAN and pix2pix,
     which can be effectively applied to the actual production activity. 
 
     \begin{IEEEkeywords}

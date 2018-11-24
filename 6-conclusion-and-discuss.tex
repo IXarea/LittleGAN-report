@@ -1,9 +1,11 @@
 \section{Conclusion and Discuss}
-\subsection{Research Conclusion}
-In this study, in order to obtain a smaller model, a smaller amount of training and running, and a model with good performance, we have carried out several experiments based on DCGAN\upcite{dcgan}.
-We finally proposed a facial image generation and adjustment model based on GAN\upcite{gan} and its training method.
-By adding a self-encoding network that shares some network layer parameters with GAN, the facial image adjustment in the image space with smaller information loss is realized.
-In the training aspect, we use the gradient penalty proposed in WGAN-GP\upcite{wgan-gp} and innovatively put forward The way of partition training has basically achieved the research targets.
+\subsection{Conclusion}
+In this study, in order to obtain a smaller model with good performance, we carried out several experiments.
+We finally propose a facial image generation and adjustment model and its training method.
+We share decoder and encoder among three networks, which are generator, discriminator and adjustor. In that way, we reduce the model size and the calculation of training.
+We adjuste facial image in the image space to reduce the information loss of original image during the adjustment.
+In the training aspect, we use the gradient penalty proposed in WGAN-GP\upcite{wgan-gp}. 
+Most importantly, we innovatively put forward the way of partition training and has achieved the research targets.(speed up the network convergence and further reduce the training calculation.)
 
 \subsection{Application}
 \subsubsection*{Searching for the target person}
@@ -12,12 +14,15 @@ For example, to convey the portrait information of a stranger; to obtain an imag
 In the past, the general use are verbal descriptions and drawing sketches, which have poor real-time performance, high requirements for personnel and the information conveyed is not intuitive enough to be biased.
 Our model is small, requires less computing equipment and produces images that are closer to real-world images.
 It can be easily deployed in mobile devices to better improve this reality.
-\subsubsection*{Extend the data set}
+
+\subsubsection*{Expand the data set}
 Most of today's machine learning relies on a large amount of data, while in reality there is less data tagged and tagging costs are high.
 Using our model, we can extend the data set so that machine learning can get more data for training, verification and testing to get a better model.
+
 \subsubsection*{Virtual Image Generation}
-In the virtual space, whether it is the generation of players or non-player characters in the game or the need for privacy protection in the network, individuals or enterprises have certain needs for personalized avatar generation.
-We believe that using this model can meet the above personalized needs at a lower cost.
+On the Internet, for player or non-player characters generation in games and privacy protection,
+individuals or enterprises need personalized avatar generation.
+We believe that using this model can meet the above personalized needs at a lower use-cost.
 
 \subsection{Prospect}
 \subsubsection*{Improve performance with more cutting-edge technologies}
@@ -46,11 +51,11 @@ Make it easier for users to generate images.
 \subsubsection*{Multi-domain migration}
 The model we design in this study is to provide a solution to the needs of facial image generation and adjustment that is more suitable for the production environment.
 While the improved method we proposed in the study can also be applied to more fields than facial image generation.
-We hope to transfer and apply the results and experiences gained in our research to more areas and reduce their training, deployment, and operational costs.
+We hope to transfer and apply the results and experiences gained in our research to more areas and reduce their training, deployment, and running costs.
 
 \vspace{4ex}
 
-We have opened source code of our model, training and testing in this research on Github, \url{https://github.com/ixarea/ourgan}.
+We have opensourced code of our model, training and testing in this research on Github, \url{https://github.com/ixarea/littlegan}.
 We are and will continue to conduct in-depth research to further improve and perfect the model,
     such as improving the performance, expanding the applicable field and improving the ecosystem.
 We believe that with our efforts and the help of the community,
