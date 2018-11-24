@@ -18,7 +18,7 @@ Figure \ref{roadmap} is the overall technical roadmap of this study.
 
 In previous model adjustments, we conducted several comparative tests to select suitable hyperparameters.
 
-Figure \ref{norm_bach} and Figure \ref{norm_instance} show the results of model after 2 epochs using batch normalization and instance normalization respectively (about 5500 iterations per epoch).
+Figure \ref{norm_bach} and Figure \ref{norm_instance} show the results of model after training 2 epochs using batch normalization and instance normalization respectively (about 5500 iterations per epoch).
 It can be seen that the image quality is improved under the same training amount after using instance normalization,
     which means that the convergence speed of the model is faster.
 
@@ -26,49 +26,51 @@ It can be seen that the image quality is improved under the same training amount
     \begin{minipage}[t]{0.48\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/result_norm_batch.png}
-        \caption{Test result using Batch Normalization after 2 epochs}
+        \caption{Test result using Batch Normalization after training 2 epochs}
         \label{norm_bach}
     \end{minipage}
         \hfill
     \begin{minipage}[t]{0.48\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/result_norm_instance.png}
-        \caption{Test result using Instance Normalization after 2 epochs}
+        \caption{Test result using Instance Normalization after training 2 epochs}
         \label{norm_instance}
     \end{minipage}
 \end{figure}
 
 In addition, we tested the effects of convolution kernel size and numbers of convolution filters on model performance and model size.
 Fig.\ref{conv_filter_16}, Fig.\ref{conv_filter_24}, and Fig.\ref{conv_filter_32} are convolution filters using 16 times, 24 times, and 32 times,
-    respectively and the output results are completed after 15 epochs.
-It can be seen that after the number of convolution filters is lowered,
+    respectively and the output results are completed after training 15 epochs.
+Times of convolution filters mean the start amount of convolution kernel.
+It will be doubled in each next layer of decoder and encoder.
+It can be seen that after the convolution filters is lowered,
     the image quality does not decrease markedly under the same training amount.
 In order to reduce the size of the model to achieve the purpose of reducing use-cost,
-    we finally chose a 16 times number of convolution filters.
+    we finally chose a 16 times convolution filters.
 
 \begin{figure}
     \begin{minipage}[t]{0.48\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/result_conv_filter_16.png}
-        \caption{Test result using 16x convolution filter after 15 epochs}
+        \caption{Test result using 16x convolution filter after training 15 epochs}
         \label{conv_filter_16}
     \end{minipage}
         \hfill
     \begin{minipage}[t]{0.48\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/result_conv_filter_24.png}
-        \caption{Test result using 24x convolution filter after 15 epochs}
+        \caption{Test result using 24x convolution filter after training 15 epochs}
         \label{conv_filter_24}
     \end{minipage}
     \begin{minipage}[t]{\linewidth}
         \centering
         \includegraphics[width=0.48\textwidth]{figures/result_conv_filter_32.png}
-        \caption{Test result using 32x convolution filter after 15 epochs}
+        \caption{Test result using 32x convolution filter after training 15 epochs}
         \label{conv_filter_32}
     \end{minipage}
 \end{figure}
 
-Figure \ref{conv_kernel_5} and \ref{conv_kernel_3} show the results after 4 epochs of the 5×5 and 3×3 (transposed) convolution kernel,
+Figure \ref{conv_kernel_5} and \ref{conv_kernel_3} show the results after training 4 epochs of the 5×5 and 3×3 (transposed) convolution kernel,
     respectively, under a 16 times convolution filter.
 It can be seen that switching from a 5×5 convolution kernel to a 3×3 size,
     the image quality is degraded within an acceptable range, so we choose a 3×3 convolution kernel.
@@ -77,14 +79,14 @@ It can be seen that switching from a 5×5 convolution kernel to a 3×3 size,
     \begin{minipage}[t]{0.48\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/result_conv_kernel_5.png}
-        \caption{Test result using 5×5 convolution kernel after 4 epochs}
+        \caption{Test result using 5×5 convolution kernel after training 4 epochs}
         \label{conv_kernel_5}
     \end{minipage}
         \hfill
     \begin{minipage}[t]{0.48\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/result_conv_kernel_3.png}
-        \caption{Test result using 3×3 convolution kernel after 4 epochs}
+        \caption{Test result using 3×3 convolution kernel after training 4 epochs}
         \label{conv_kernel_3}
     \end{minipage}
 \end{figure}
@@ -107,7 +109,7 @@ LittleGAN consists of 3 networks and 2 main components.
 The newtworks are generator, discriminator and adjustor.
 The main components are encoder and decoder.
 In LittleGAN, generator generates facial images from noise and facial attributes,
-    and then adjustor combines images with new attributes to obtain new images.
+    and then adjustor combines it with new attributes to obtain new images.
 
 
 \subsection{Decoder and Encoder}
@@ -117,7 +119,7 @@ Main components, encoder and decoder, are used for conversion of feature map and
 An encoder can extract features from the image from global to local.
 Using convolution, starting from an image of 128×128×3 (height × width × channels),
     the convolution with stride is continuously performed.
-After each convolution, normalization, activation, and Dropout\upcite{dropout} is used.
+After each convolution, normalization, activation, dropout\upcite{dropout} is used.
 
 The convolution layer uses a 5×5 convolution kernel.
 Convolution filter is 16 in the first layer, doubled in each next layer.
@@ -127,7 +129,7 @@ Since we use gradient penalty\upcite{wgan-gp} in training,
     Instance Normalization\upcite{instance} is used at the same time.
 To preserve the image for more information, Leaky ReLU (alpha=0.2) is used as the activation function.
 In order to prevent occurrence of over-fitting,
-    Dropout\upcite{dropout} is used in the training to randomly hide some neurons to reduce the interaction between filters.
+    dropout\upcite{dropout} is used in the training to randomly hide some neurons to reduce the interaction between filters.
 
 Decoder is used to generate an image from the feature map.
 Using transposition convolution, the same number of filters,
@@ -139,9 +141,9 @@ Normalization and activation are performed after each transposition convolution 
 
 We also named the combination of discriminator and generator as GAN network.
 Generator consists of a fully connected layer and a decoder.
-The facial attribute is combined with latent vector (conform to the normal distribution) as input to generate an image by generator.
-Discriminator consists of an encoder and 2 fully connected layer.
-It uses image as input then extracts features and probability of image comes from data.
+The facial attributes are combined with latent maps (conform to the normal distribution) as input to generate images by generator.
+Discriminator consists of an encoder and 2 fully connected layers.
+It uses images as input then extracts features and the probability of image comes from data.
 
 
 In generator, through a fully connected layer, the input is combined and transformed into feature map(in 4×4×16n size).
@@ -168,18 +170,18 @@ Figure \ref{net_generator} is the graph of generate network structure.
 
 Discriminator use encoder to extracts the feature map from the input image first.
 Then on the one hand, the feature map is connected to the dimension 1 through a fully connected layer.
-The Sigmoid activation function is used to normalize the result to 0~1,
+The Sigmoid activation function is used to normalize the result to [0,1],
     which indicates the possibility that the image comes from real data.
 On the other hand, feature map is connected to the same dimension as attribute,
     the latent facial attribute information is extracted,
-    and the result is also normalized to 0~1 using the Sigmoid activation function,
+    and the result is also normalized to [0,1] using the Sigmoid activation function,
     thereby indicating the possibility that the image has these facial attributes.
 Figure \ref{net_discriminator} is the graph of generate network structure.
 
 
 For discriminator loss function, since the Sigmoid is used to activate the output,
     in order to ensure that the network parameters will not dead,
-    we expect the loss of discriminator output to 0.02~0.98 instead of 0~1.
+    we expect the loss of discriminator output to [0.02,0.98] instead of [0,1].
 Since discriminator not only outputs probability of image comes from data but also contains the facial attribute information implied by the image,
     its loss includes the GAN loss and the conditional judgment loss.
 In discriminator, we expect the output from real image close to 0.98, while the output from fake image close to 0.02.
