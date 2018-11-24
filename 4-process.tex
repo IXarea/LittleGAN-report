@@ -2,8 +2,8 @@
 \subsection{Overall Roadmap}
 
 In order to obtain a smaller model, less training and running with better performance,
-we decided to make multiple models and training improvements based on DCGAN\upcite{dcgan} and improve it through multiple sets of experiments.
-Figure \ref{roadmap} is the overall technical roadmap for this study.
+we decided to make multiple models and training improvements based on DCGAN\upcite{dcgan} and improve it through multiple sets of experiment.
+Figure \ref{roadmap} is the overall technical roadmap of this study.
 
 \begin{figure}
     \begin{center}
@@ -25,14 +25,14 @@ It can be seen that the image quality is improved under the same training amount
     \begin{minipage}[t]{0.48\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/result_norm_batch.png}
-        \caption{Test result using Batch Normalization after 2 epoch}
+        \caption{Test result using Batch Normalization after 2 epochs}
         \label{norm_bach}
     \end{minipage}
         \hfill
     \begin{minipage}[t]{0.48\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/result_norm_instance.png}
-        \caption{Test result using Instance Normalization after 2 epoch}
+        \caption{Test result using Instance Normalization after 2 epochs}
         \label{norm_instance}
     \end{minipage}
 \end{figure}
@@ -40,47 +40,47 @@ It can be seen that the image quality is improved under the same training amount
 In addition, we tested the effects of convolution kernel size and number of convolution filters on model performance and model size.
 Fig.\ref{conv_filter_16}, Fig.\ref{conv_filter_24}, and Fig.\ref{conv_filter_32} are convolution filters using 16 times, 24 times, and 32 times, respectively and the output results are completed after 15 epochs.
 It can be seen that after the number of convolution filters is lowered, the image quality does not decrease markedly under the same training amount.
-In order to reduce the size of the model to achieve the purpose of reducing the cost of use, we finally chose a 16 times the number of convolution filters.
+In order to reduce the size of the model to achieve the purpose of reducing the use-cost, we finally chose a 16 times the number of convolution filters.
 
 \begin{figure}
     \begin{minipage}[t]{0.48\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/result_conv_filter_16.png}
-        \caption{Test result using 16x convolution filter after 15 epoch}
+        \caption{Test result using 16x convolution filter after 15 epochs}
         \label{conv_filter_16}
     \end{minipage}
         \hfill
     \begin{minipage}[t]{0.48\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/result_conv_filter_24.png}
-        \caption{Test result using 24x convolution filter after 15 epoch}
+        \caption{Test result using 24x convolution filter after 15 epochs}
         \label{conv_filter_24}
     \end{minipage}
     \begin{minipage}[t]{\linewidth}
         \centering
         \includegraphics[width=0.48\textwidth]{figures/result_conv_filter_32.png}
-        \caption{Test result using 32x convolution filter after 15 epoch}
+        \caption{Test result using 32x convolution filter after 15 epochs}
         \label{conv_filter_32}
     \end{minipage}
 \end{figure}
 
-Figure \ref{conv_kernel_5} and \ref{conv_kernel_3} show the results after 4 epoch of the convolution kernel (or transposed convolution kernel) of 5×5 size and 3×3 size,
-    respectively, under a 16-fold number convolution filter.
-It can be seen that switching from a 5×5 size convolution kernel to a 3×3 size,
-    the image quality is degraded within an acceptable range, so we chose a 3×3 size convolution kernel.
+Figure \ref{conv_kernel_5} and \ref{conv_kernel_3} show the results after 4 epochs of the 5×5 and 3×3 (transposed) convolution kernel,
+    respectively, under a 16 times convolution filter.
+It can be seen that switching from a 5×5 convolution kernel to a 3×3 size,
+    the image quality is degraded within an acceptable range, so we chose a 3×3 convolution kernel.
 
 \begin{figure}
     \begin{minipage}[t]{0.48\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/result_conv_kernel_5.png}
-        \caption{Test result using 5×5 size convolution kernel after 4 epoch}
+        \caption{Test result using 5×5 convolution kernel after 4 epochs}
         \label{conv_kernel_5}
     \end{minipage}
         \hfill
     \begin{minipage}[t]{0.48\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/result_conv_kernel_3.png}
-        \caption{Test result using 3×3 size convolution kernel after 4 epoch}
+        \caption{Test result using 3×3 convolution kernel after 4 epochs}
         \label{conv_kernel_3}
     \end{minipage}
 \end{figure}
@@ -99,47 +99,49 @@ After the research above, we finally obtained the conditional facial image gener
     \end{center}
 \end{figure}
 
-The model consists of a generative confrontation network and a auto-encoder network.
-The main components in the network are the encoder and the decoder and the two networks share the network parameters of the encoder.
-In this model, the generator generates a facial image from the noise and facial attribute and then combines the original image with the new facial attribute to obtain a new image by adjusting the network.
+The model consists of 3 networks and 2 main component.
+The newtworks are generator, discriminator and adjustor.
+The main components in the network are encoder and decoder.
+In this model, the generator generates facial image from noise and facial attribute,
+    and then adjustor combines image with new attribute to obtain new image.
 
 
 \subsection{Decoder and Encoder}
 
 The main component encoder and decoder are used for the conversion of feature vectors and images.
 An encoder is used to extract features from an image.
-Using a convolution method, starting from an image of 128×128×3 (height × width × channels),
-    the convolution operation with step size is continuously performed to extract features while reducing the image dimension.After each convolution operation,
+Using convolution, starting from an image of 128×128×3 (height × width × channels),
+    the convolution with stride is continuously performed to extract features while reducing the image dimension.
+After each convolution,
     normalization, activation, and Dropout\upcite{dropout} are performed in order to extract features from the image as a whole to the local.
 
-The convolutional layer uses a convolution kernel size of 5×5.
-The filter is incremented from the 16th layer and the step size is set to 2 so the image dimension is reduced when the feature is extracted,
-    and the network is lowered with lower calculation amount.
-Since the gradient penalty proposed in WGAN-GP\upcite{wgan-gp} is used in the training,
-    our normalization layer chose Instance Normalization\upcite{instance}.
+The convolution layer uses 5×5 convolution kernel.
+Convolution filter is 16 in first layer, doubled each next layer.
+So the image dimension is reduced when the feature is extracted,
+    and the network has lower calculation amount.
+Since we use gradient penalty\upcite{wgan-gp} in training,
+    Instance Normalization\upcite{instance} is used as the same time.
 To preserve the image for more information, the activation function uses Leaky ReLU with alpha=0.2.
-In order to alleviate the occurrence of over-fitting,
+In order to prevent the occurrence of over-fitting,
     Dropout\upcite{dropout} is used in the training to randomly hide some neurons to reduce the interaction between filters.
 
 The decoder is used to generate an image from the feature vector.
-Using the method of transposition convolution, the same number of filters,
-    step size, and convolution kernel are symmetrically used with the encoder.
-Normalization and activation are performed after each transposition convolution operation.
-The normalization layer and the activation function are normalized to the same instance as the encoder and the Leaky ReLU with alpha = 0.2.
+Using transposition convolution, the same number of filters,
+    stride, and convolution kernel are symmetrically used with the encoder.
+Normalization and activation are performed after each transposition convolution as same as encoder.
 
 
-\subsection{Generative Adversial Network}
+\subsection{Generator and Discriminator}
 
-In generative adversarial networks, the model consists of a fully connected layer and a decoder.
-The facial attribute condition is combined with random noise to generate an image by transposing convolution.
-The discriminator consists of an encoder and a fully connected layer at the bottom,
-    and extracts features by convolution and combines them.
-The condition determines whether the image comes from the real world and extracts the facial attribute information implied by the image.
+In generative adversarial networks, the generator consists of a fully connected layer and a decoder.
+The facial attribute is combined with random noise to generate an image by transposing convolution.
+The discriminator consists of an encoder and a fully connected layer at the bottom, and extracts features by convolution and combines them.
+It determines whether the image comes from the real world and extracts the facial attribute information implied by the image.
 
-The top of the generator is a fully connected network that joins the input facial attribute conditions and the latent vector that conform to the normal distribution into a 4×4×n layer feature map.
-After the second and fourth convolution, the feature map connected by the facial attribute condition parameter is added,
+Generator include fully connected layer that joins the input facial attribute and the latent vector that conform to the normal distribution into a 4×4×n layer feature map.
+After the second and fourth convolution, the feature map connected by the facial attribute parameter is added,
     and then the image is generated from the global to the local by the decoder layer by layer.
-Finally a convolution operation with a step size of 1 and a filter number of 3 is performed and used.
+Finally a convolution with a stride of 1 and a filter number of 3 is performed and used.
 The tanh function is activated to obtain a three-channel color image of 128×128×3 size.
 Figure \ref{net_generator} is the graph of generate network structure.
 
@@ -172,7 +174,7 @@ Figure \ref{net_discriminator} is the graph of generate network structure.
 
 
 For the discriminator loss, since the Sigmoid is used to activate the output,
-    in order to ensure that the neuron parameters in the network layer are not too large or too small leading to model out of balance,
+    in order to ensure that the network parameters will not dead,
     we limit the loss of the discriminator output to 0.02~0.98.
 Since the discriminator not only outputs whether the image is from the real world but also contains the facial attribute information implied by the image,
     it includes the GAN loss and the conditional judgment loss.
@@ -184,7 +186,7 @@ Equation \eqref{loss_d_gan}, Equation \eqref{loss_d_a}, and Equation \eqref{loss
 \begin{equation}
     Loss_{D-GAN}(D,G)=
     \mathbb{E}_{y\thicksim P(data)}[(0.98-D(y))^2]+
-    \mathbb{E}_{c,z\thicksim P(fake)}[D(G(c,z))^2]
+    \mathbb{E}_{c,z\thicksim P(fake)}[D(G(c,z)-0.02)^2]
     \label{loss_d_gan}
 \end{equation}
 
@@ -202,7 +204,7 @@ Equation \eqref{loss_d_gan}, Equation \eqref{loss_d_a}, and Equation \eqref{loss
     \label{loss_d}
 \end{equation}
 
-We add an mean absolute error to the generator's loss function expecting the model to make the overall color and layout of the generated image more realistic with the diversity of GAN's generation results.
+We add a mean absolute error to the generator's loss function expecting the model to make the overall color and layout of the generated image more realistic with the diversity of GAN's generation results.
 We expect the result of the generator to make the discriminator result close to 0.98 as much as possible, which is consistent with the real image.
 Therefore, the loss function of the generator is divided into GAN loss and the mean absolute error loss.
 Equation \eqref{loss_g_gan}, Equation \eqref{loss_g_l1}, and Equation \eqref{loss_g} are the GAN loss, mean absolute error loss and total loss of the generator, respectively.
@@ -236,24 +238,24 @@ Our goal is to minimize the loss function of the generator and the discriminator
 \end{equation}
 
 
-\subsection{Auto-Encoder Network}
-The auto-encoder network is composed of a decoder, an encoder, a plurality of shortcut channels and a combined channel of adjustment conditions.
+\subsection{Adjustor Network}
+The Adjustor network consists of a decoder, an encoder, several shortcut channels and a combined channel of adjustment conditions.
 The network uses an encoder to extract features from the global to the detail layer by layer and transmits each layer feature to the decoder network through a shortcut channel so that each layer of the network does not need to carry all the information of the image.
 The network uses the decoder to combine the original features and adjustment conditions of the image from the detail to the global step by step to generate an image.
 
-Figure \ref{net_auto-encoder} is the graph of generate network structure.
+Figure \ref{net_adjustor} is the graph of generate network structure.
 
 \begin{figure}
     \begin{center}
-    \includegraphics[width=0.48\textwidth]{figures/net_auto-encoder.pdf}
-    \caption{The Auto-Encoder Network Structure of LittleGAN}
-    \label{net_auto-encoder}
+    \includegraphics[width=0.48\textwidth]{figures/net_adjustor.pdf}
+    \caption{The Adjustor Network Structure of LittleGAN}
+    \label{net_adjustor}
     \end{center}
 \end{figure}
 
-In an auto-encoder network, the parameters of the decoder are independent of the decoder parameters in the GAN and the encoder parameters are shared with the GAN.
-We use GAN loss and absolute mean error as a loss function for the auto-encoder network.
-Equation \eqref{loss_u_gan}, Equation \eqref{loss_u_l1}, and Equation \eqref{loss_u} are the GAN loss, mean absolute error loss and total loss of the auto-encoder, respectively.
+In an adjustor network, the decoder and encoder parameters are shared with GAN's.
+We use GAN loss and absolute mean error as a loss function for the adjustor network.
+Equation \eqref{loss_u_gan}, Equation \eqref{loss_u_l1}, and Equation \eqref{loss_u} are the GAN loss, mean absolute error loss and total loss of the adjustor, respectively.
 
 \begin{equation}
     Loss_{U-GAN}(A,D,U)=
