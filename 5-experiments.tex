@@ -1,7 +1,8 @@
 \section{Experiments}
 
 \subsection{Experiment Environment}
-We implemented our model using Python 3.6, Tensorflow 1.11 and Keras 2.2. The model was trained on a single NVIDIA TITAN X (Pascal) GPU platform with ubuntu installed.
+We implemented our model using Python 3.6, Tensorflow 1.11 and Keras 2.2.
+The model was trained on a single NVIDIA TITAN X (Pascal) GPU platform with ubuntu installed.
 
 
 \subsection{Dataset}
@@ -19,16 +20,16 @@ For the 40 attributes in the dataset, we select 4 of them: 'gender', 'skin color
 \subsection{Training Details}
 
 We use the Adam\upcite{adam} optimizer to optimize the network.
-The learning rates of the discriminator, generator and adjustor network are set to 0.0001, 0.00015 and 0.00005, respectively.
+The learning rates of discriminator, generator and adjustor network are set to 0.0001, 0.00015 and 0.00005, respectively.
 $\beta1$ and $\beta2$ select the default configuration in Adam's\upcite{adam} paper, which is respectively 0.5 and 0.9.
-The encoder network is freezed when training the adjustor network.
-The $\lambda$ in both the generator and the adjustor network is set to 0.02. 
+Eecoder network is freezed when training adjustor network.
+The $\lambda$ in both generator and adjustor network is set to 0.02.
 We use 128-dimensional latent vector as input.
 Each batch uses a random 32 training set images for training.
  A total of 25 training sessions are used.
-In each batch, the generator is used to generate the image first.
-Then the discriminator is used to identify the image and adjusted by the adjustor network.
-The calculation results above are on gradient penalization and the respective losses of the discriminator, the generator, and the adjustor network are calculated.
+In each batch, generator is used to generate the image first.
+Then discriminator is used to identify the image and adjusted by adjustor network.
+The calculation results above are on gradient penalization and the respective losses of discriminator, generator, and adjustor network are calculated.
 Then the respective optimizers separately performs backpropagation and optimizes network weight parameters.
 In the partition training, the overall model training and the partition training are performed in a 4:1 ratio.
 
@@ -132,9 +133,9 @@ Our network is able to adjust the specified features of the facial image.
 \subsubsection*{Faster Convergence}
 Fig.\ref{loss_part_on_d}, Fig.\ref{loss_part_on_g}, and Fig.\ref{loss_part_on_u} show the changes of the loss of each components that turn partition training off, respectively.
 Fig.\ref{loss_part_off_d}, Fig.\ref{loss_part_off_g}, and Fig.\ref{loss_part_off_u} show the changes of the loss of each components that turn partition training off, respectively.
-It can be seen that the loss of the generator reaches the balance faster after the partition training is started and the loss of the discriminator also has a small amplitude and becomes stable.
+It can be seen that the loss of generator reaches the balance faster after partition training is started and the loss of discriminator also has a small amplitude and becomes stable.
 Figure \ref{part_on} and Figure \ref{part_off} show the test output of the partition training on and off, respectively.
-After 20 epochs, with partition training is on, image quality is improved under the same training amount.
+After 20 epochs, with partition training on, image quality is improved under the same training amount.
 
 \begin{figure}
     \begin{minipage}[t]{0.48\linewidth}

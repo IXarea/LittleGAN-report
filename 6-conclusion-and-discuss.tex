@@ -1,23 +1,29 @@
 \section{Conclusion and Discuss}
 \subsection{Conclusion}
-In this study, in order to obtain a smaller model with good performance, we carried out several experiments.
+In this study, in order to obtain a smaller model with good performance, we have carried out several experiments.
 We finally propose a facial image generation and adjustment model and its training method.
-We share decoder and encoder among three networks, which are generator, discriminator and adjustor. In that way, we reduce the model size and the calculation of training.
-We adjuste facial image in the image space to reduce the information loss of original image during the adjustment.
-In the training aspect, we use the gradient penalty proposed in WGAN-GP\upcite{wgan-gp}. 
-Most importantly, we innovatively put forward the way of partition training and has achieved the research targets.(speed up the network convergence and further reduce the training calculation.)
+We share decoder and encoder among three networks, which are generator, discriminator and adjustor.
+In that way, we reduce the model size and the calculation of training.
+We adjust facial image in the image space. It reduces the information loss of original image during the adjustment.
+In the training aspect, we use gradient penalty proposed in WGAN-GP\upcite{wgan-gp}.
+Most importantly, we innovatively put forward partition training.
+We have achieved research targets, which are speeding up convergence and further reducing training calculation.
 
 \subsection{Application}
 \subsubsection*{Searching for the target person}
-In daily life, in many cases, it is necessary to obtain an image of a specific person.
-For example, to convey the portrait information of a stranger; to obtain an image in which the character is different from the state in the photo.
-In the past, the general use are verbal descriptions and drawing sketches, which have poor real-time performance, high requirements for personnel and the information conveyed is not intuitive enough to be biased.
+In daily life, in many cases, it is necessary to obtain images of specific person.
+For example, convey the portrait information of strangers and
+    obtain images in different states.
+In the past, general use are verbal descriptions and drawing sketches. They have poor real-time performance.
+    Also, requirements for personnel is high. The information conveyed is not intuitive enough to be biased.
 Our model is small, requires less computing equipment and produces images that are closer to real-world images.
 It can be easily deployed in mobile devices to better improve this reality.
 
-\subsubsection*{Expand the data set}
-Most of today's machine learning relies on a large amount of data, while in reality there is less data tagged and tagging costs are high.
-Using our model, we can extend the data set so that machine learning can get more data for training, verification and testing to get a better model.
+\subsubsection*{Expand dataset}
+Nowadays, most of machine learning relies on a large amount of data,
+    while in reality, there is less data tagged and tagging costs are high.
+Using LittleGAN, we can expand dataset. Machine learning can get more data for training,
+    verification and testing.
 
 \subsubsection*{Virtual Image Generation}
 On the Internet, for player or non-player characters generation in games and privacy protection,
@@ -25,42 +31,58 @@ individuals or enterprises need personalized avatar generation.
 We believe that using this model can meet the above personalized needs at a lower use-cost.
 
 \subsection{Prospect}
-\subsubsection*{Improve performance with more cutting-edge technologies}
+
+\subsubsection*{More Up-to-date Technologies}
 
 In our pre-study stage, we tried to add a residual layer to the model.
 Such an adjustment can make the front network layer of the deep neural network better trained.
-But this led to the failure of the model training during the test, in that case, we eventually abandoned the improvement.
+But this led to the failure of the model training during the test.
+    In that case, we eventually abandoned the improvement.
 We will next delve into the reasons and apply more new technologies to improve model performance.
 
 
-\subsubsection*{More adjustable attributes}
+\subsubsection*{More Adjustable Attributes}
 
-Due to the lack of some common facial attributes in the dataset, some feature tags are not specific enough, which makes the facial image description of our input model not comprehensive enough to make free adjustment of the facial image through the model.
-Therefore, we will use the method proposed in StarGAN\upcite{stargan}, which use multiple data sets for training, to enhance the generalization ability of the model.
+Due to the lack of some common attributes in the dataset,
+    some attributes are not specific enough.
+This makes our model's input is not comprehensive enough to generation or adjustment in any way.
+Therefore, we will use the method proposed in StarGAN\upcite{stargan},
+    which use multiple datasets for training, to enhance the generalization ability of the model.
 
 
-\subsubsection*{More HD images}
-Due to data set limitations, the images used for training have lower resolution in our experiments.
+\subsubsection*{More HD Images}
+
+Due to dataset limitations, the images used for training have lower resolution in our experiments.
 Therefore, the image resolution of LittleGAN output is also lower.
-In a later improvement, we will try to use a higher resolution tagged facial dataset, for example, CelebA-HQ\upcite{pix2pixhd}, to train with a higher performance server for a higher resolution model.
-\subsubsection*{Using natural language as a conditional input}
-Since we did not find the natural language description data set of the facial image when we started this research, we canceled the plan to design the facial image generation and adjustment model with natural language as the input condition.
-Next, we will try to create a natural language description dataset of the facial image.
-The dataset is to be used to design and train a model of facial image generation and adjustment with natural language input, further reducing the requirements of LittleGAN for users.
+In a later improvement, we will try to use a higher resolution labeled facial dataset like CelebA-HQ\upcite{pix2pixhd},
+    to train with a higher performance server for a higher resolution model.
+
+
+\subsubsection*{Natural Language as Input}
+
+Since we did not find suitable natural language description dataset of facial images at first,
+    we have canceled the plan to design model with natural language as input.
+Next, we will try to create a natural language description dataset of facial images.
+The dataset will be used to design and train a model of facial image generation and adjustment with natural language input,
+    further reducing the requirements of LittleGAN for users.
 Make it easier for users to generate images.
-\subsubsection*{Multi-domain migration}
-The model we design in this study is to provide a solution to the needs of facial image generation and adjustment that is more suitable for the production environment.
-While the improved method we proposed in the study can also be applied to more fields than facial image generation.
-We hope to transfer and apply the results and experiences gained in our research to more areas and reduce their training, deployment, and running costs.
+
+
+\subsubsection*{Multi-domain Migration}
+
+LittleGAN is to provide a solution to the needs of facial image generation and adjustment. It is more suitable for production environment.
+The improved method we proposed in the study, like partition training, can also be applied to more fields.
+We hope to transfer and apply the results and experience gained in our research to more areas and reduce use-cost of training, deployment and running.
+
 
 \vspace{4ex}
 
-We have opensourced code of our model, training and testing in this research on Github, \url{https://github.com/ixarea/littlegan}.
-We are and will continue to conduct in-depth research to further improve and perfect the model,
+We have opensourced code of our model, training and testing on Github, \url{https://github.com/ixarea/littlegan}.
+We are and will continue to conduct in-depth research to further improve and perfect LittleGAN,
     such as improving the performance, expanding the applicable field and improving the ecosystem.
 We believe that with our efforts and the help of the community,
-    this research project will enable image generation and adjustment to enter people's production and life
-    so that everyone can have a more convenient life in the era of machine learning.
+    this research project will enter people's production and life.
+    In that case, everyone can have a more convenient life.
 
 
 

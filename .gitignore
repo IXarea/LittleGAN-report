@@ -12,3 +12,5 @@ Thumbs.db
 !figures/*.pdf
 *.bak
 test/*
+.idea
+.vscode
