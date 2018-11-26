@@ -9,17 +9,19 @@ Based on DCGAN\upcite{dcgan}, they embedded text descriptions into words and com
 In StackGAN\upcite{stackgan}, the author also embedded the text description into the text feature map,
     and initially generated the contour of the object,
     and further combined the text feature map to generate higher resolution and more detailed images.
-    InfoGAN was able to extract attributes from images, enabling conditional generation of images and unsupervised learning.
+InfoGAN\upcite{infogan} was able to extract attributes from images, enabling conditional generation of images and unsupervised learning.
 They also used different discriminators to identify images at different stages, thereby improving the quality of the image.
 
 
 \subsubsection*{Facial Image Generation}
 
-At present, there are several models related to the improvement of image generation quality,
+At present, there are several methods related to the improvement of facial image generation,
     such as BEGAN\upcite{began} and PGGAN\upcite{pggan}.
-BEGAN\upcite{began} used a generator and a discriminator similar to variational auto-encoding.
-It sequentially convolved images. It improved resolution and diversity of images. It also maintained the stability.
-PGGAN\upcite{pggan} first trained low-resolution facial image. It then gradually increased network layer for training, 
+BEGAN\upcite{began} used variational auto-encoder as the discriminator.
+It provides a hyperparameter to instruct the balance between image variety and quality.
+It also maintained the stability.
+PGGAN\upcite{pggan} first trained low-resolution facial image.
+It then gradually increased network layer for training, 
 therefore improving resolution of output images and stability of the network.
 
 
@@ -28,7 +30,6 @@ therefore improving resolution of output images and stability of the network.
 
 \subsubsection*{Image Translation}
 Image translation treats the image as outputs.
- The purpose of changing attributes is achieved by converting them.
 Pix2pix\upcite{pix2pix} used U-Net network, L1 Loss and PatchGAN classifiers.
 In generator, U-Net combined Encoder with Decoder,
     reducing pressure on each network layer and retaining more image information.
@@ -46,11 +47,11 @@ In that case, size of the model and amount of calculation are too large to meet 
 
 \subsubsection*{Facial Image Adjustment}
 StarGAN\upcite{stargan} trained across datasets so that the model could learn attributes and features from multiple datasets.
- It could generate images by specifying more attributes.
+It could generate images by specifying more attributes.
 AttGAN\upcite{attgan} extracted the attributes and latent map of images,
     changed attributes and combined latent map to generate images.
     It realized adjustment of images.
-Pix2pixHD\upcite{pix2pixhd} used multiple discriminators to discriminating images of different resolutions
+Pix2pixHD\upcite{pix2pixhd} used different discriminators to discriminate images of different resolutions
     and finally combined features at different resolutions to generate high-resolution facial images.
 However, this model is huge and difficult to train.
 Apart from that, it is too expensive to deploy and run.

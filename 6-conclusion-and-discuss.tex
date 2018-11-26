@@ -4,7 +4,8 @@ In this study, in order to obtain a smaller model with good performance, we have
 We finally propose a facial image generation and adjustment model and its training method.
 We share decoder and encoder among three networks, which are generator, discriminator and adjustor.
 In that way, we reduce the model size and the calculation of training.
-We adjust facial image in the image space. It reduces the information loss of original image during the adjustment.
+We adjust facial image in the image space.
+It reduces the information loss of original image during the adjustment.
 In the training aspect, we use gradient penalty proposed in WGAN-GP\upcite{wgan-gp}.
 Most importantly, we innovatively put forward partition training.
 We have achieved research targets, which are speeding up convergence and further reducing training calculation.
@@ -12,22 +13,24 @@ We have achieved research targets, which are speeding up convergence and further
 \subsection{Application}
 \subsubsection*{Searching for the target person}
 In daily life, in many cases, it is necessary to obtain images of specific person.
-For example, convey the portrait information of strangers and
-    obtain images in different states.
-In the past, general use are verbal descriptions and drawing sketches. They have poor real-time performance.
-    Also, requirements for personnel is high. The information conveyed is not intuitive enough to be biased.
+For example, convey the portrait information of strangers and obtain images in different states.
+In the past, general use are verbal descriptions and drawing sketches.
+They have poor real-time performance.
+Also, requirements for personnel is high.
+The information conveyed is not intuitive enough to be biased.
 Our model is small, requires less computing equipment and produces images that are closer to real-world images.
 It can be easily deployed in mobile devices to better improve this reality.
 
 \subsubsection*{Expand dataset}
 Nowadays, most of machine learning relies on a large amount of data,
     while in reality, there is less data tagged and tagging costs are high.
-Using LittleGAN, we can expand dataset. Machine learning can get more data for training,
+Using LittleGAN, we can expand dataset.
+Machine learning can get more data for training,
     verification and testing.
 
 \subsubsection*{Virtual Image Generation}
 On the Internet, for player or non-player characters generation in games and privacy protection,
-individuals or enterprises need personalized avatar generation.
+    individuals or enterprises need personalized avatar generation.
 We believe that using this model can meet the above personalized needs at a lower cost.
 
 \subsection{Prospect}
@@ -70,7 +73,8 @@ Make it easier for users to generate images.
 
 \subsubsection*{Multi-domain Migration}
 
-LittleGAN is to provide a solution to the needs of facial image generation and adjustment. It is more suitable for production environment.
+LittleGAN is to provide a solution to the needs of facial image generation and adjustment.
+It is more suitable for production environment.
 The improved method we proposed in the study, like partition training, can also be applied to more fields.
 We hope to transfer and apply the results and experience gained in our research to more areas and reduce use-cost of training, deployment and running.
 
