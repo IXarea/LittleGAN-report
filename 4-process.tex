@@ -124,7 +124,7 @@ After each convolution, normalization, activation, dropout\upcite{dropout} is us
 The convolution layer uses a 5×5 convolution kernel.
 Convolution filter is 16 in the first layer, doubled in each next layer.
 So the image dimension is reduced when the feature is extracted.
-    Also, the network has lower calculation amount.
+Also, the network has lower calculation amount.
 Since we use gradient penalty\upcite{wgan-gp} in training,
     Instance Normalization\upcite{instance} is used at the same time.
 To preserve the image for more information, Leaky ReLU (alpha=0.2) is used as the activation function.
