@@ -5,65 +5,54 @@
 Generative Adversarial Networks (GAN) consists of two networks, the generator and discriminator.
 The training process is a competition between the generator and discriminator.
 The discriminator is trained to separate data from the generator from the training set,
-    while the generator imitates the training set data to increase the error rate of the discriminator. 
+    while the generator changes itself to let discriminator believe its output coming from real data.
+In that way, the generator achieves the goal of imitating the training dataset.
 
-The basis of our model, DCGAN, is a type of GAN that uses convolutions to replace connections layers for a more stable training process.
+Our baseline model, DCGAN, is a type of GAN that uses convolutions to replace fully connected layers for a more stable training process.
 
 
 \subsection{Image Generation}
 
-Text-to-Image\upcite{text2img} is a method based on DCGAN[2] for generating images from text description.
-Based on DCGAN\upcite{dcgan}, they embed text descriptions into words and combine them with latent map to generate images through convolution.
-In StackGAN\upcite{stackgan}, the author also embeds the text description into the text feature map,
-    and initially generates the outline of the object,
-    and further combines the text feature map to generate higher resolution and more detailed images.
+Text-to-Image\upcite{text2img} is a method based on DCGAN\upcite{dcgan} for generating images from text description.
+They combine embeded description with noise to generate images through convolution.
 InfoGAN\upcite{infogan} is able to extract attributes from images, enabling conditional generation of images through unsupervised learning.
-They also use different discriminators to identify images at different stages, thereby improving the quality of the image.
-BEGAN\upcite{began} use a variational auto-encoder as the discriminator.
-It provides a hyperparameter to adjust the balance between image variety and quality while maintaining training stability.
+% BEGAN\upcite{began} use a variational auto-encoder as the discriminator.
+% It provides a hyperparameter to adjust the balance between image variety and quality while maintaining training stability.
 PGGAN\upcite{pggan} first trains on low-resolution facial image, then gradually adds network layers for training to improve the resolution of output images and the stability of the network.
 
 \subsection{Image Translation}
 Image translation works with images as both inputs and outputs.
-Pix2pix\upcite{pix2pix} uses U-Net network, L1 Loss and PatchGAN classifiers.
-The generator contains a U-Net combining an encoder with a decoder,
+Pix2pix\upcite{pix2pix} uses U-Net network, L1 Loss.
+Theirs generator contains a U-Net combining an encoder with a decoder,
     reducing pressure on each network layer and retaining more original image information.
-The discriminator uses L1 Loss to globally constrain images.
-In partial adjustment of images,
-    pix2pix uses PatchGAN to discriminate image, improving the quality.
-Therefore, each layer of convolution combine local characteristics of corresponding layer before convolution.
-    In that case, pix2pix\upcite{pix2pix} can generate images better.
+Theirs discriminator uses L1 Loss to globally constrain images.
+In that case, pix2pix\upcite{pix2pix} can generate images better.
 CycleGAN\upcite{cyclegan} uses two generators and two discriminators to train separately achieving image conversion between two attribute domains.
+
 Whether it is pix2pix\upcite{pix2pix} or CycleGAN\upcite{cyclegan},
     although they can convert image attributes better,
     it is limited to two definite domains.
 If it is required to convert multiple attributes, multiple models are needed.
-In that case, size of the model and amount of calculation are too large to meet actual needs.
+In that case, model size and computational load are too large to meet actual needs.
 
 \subsection{Facial Image Adjustment}
 StarGAN\upcite{stargan} train across datasets so that the model can learn attributes and features from more datasets.
 It can generate images by specifying more attributes.
-AttGAN\upcite{attgan} extracts the attributes and latent map of images,
-    change attributes and combine latent map to generate images.
-It realizes adjustment of images.
-Pix2pixHD\upcite{pix2pixhd} use different discriminators to discriminate images of different resolutions
-    and finally combine features at different resolutions to generate high-resolution facial images.
-However, this model is huge and difficult to train.
-Apart from that, it is too expensive to deploy and run.
-Addtionally, the process of extracting latent map will cause information loss.
-So some features of original images will be lost in the adjusted images.
-Research on multi-angle transformation of facial images is mainly to generate positive face under the side one.
+AttGAN\upcite{attgan} extracts the attributes and noise of images,
+    change attributes and combine noise to generate images.
+It realizes adjustment of facial images.
+But the process of extracting attributes and noise will cause information loss.
+So, some features of original images will be lost in the adjusted images.
+TPGAN\upcite{tpgan} uses a variety of Loss to achieve the multi-angle transformation of facial images.
 Main method of the research is to build a facial outline and then add more details.
-Taking TPGAN\upcite{tpgan} as an example, TPGAN\upcite{tpgan} use a variety of Loss.
-It not only achieves the multi-angle transformation of facial images,
-    but also achieves purpose of repairing images and improving the quality of facial images.
+
+
 
 \vspace{3ex}
 
 From the above analysis of current situation,
     we can learn that current facial image generation and adjustment in the face research are generally separate.
 Also, different models are required to be used.
-Moreover, image attribute extraction process needs to go through different models.
 The conversion of model is likely to cause certain information loss.
 Therefore, we hope to use one model to complete two tasks of facial image generation and adjustment.
 In this way, not only network parameters can be shared,
