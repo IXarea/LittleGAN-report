@@ -136,12 +136,11 @@ Using transposition convolution, the same number of filters,
     stride and convolution kernel are symmetrically used with the encoder.
 Normalization and activation are performed after each transposition convolution as the same as the encoder.
 
-%todo continue
 \subsection{Generator and Discriminator}
 
-We also named the combination of discriminator and generator as GAN network.
+We also name the combination of discriminator and generator as GAN network.
 Generator consists of a fully connected layer and a decoder.
-The facial attributes are combined with latent maps (conform to the normal distribution) as input to generate images by generator.
+The facial attributes are combined with latent maps as input to generate images by generator.
 Discriminator consists of an encoder and 2 fully connected layers.
 It uses images as input then extracts features and the probability of image comes from data.
 

@@ -1,19 +1,18 @@
 \begin{abstract}
 
-In daily life, it is often necessary to pass portrait information, such as obtaining images from eyewitness in public security.
-However, traditional method has some disadvantages and existing machine learning model's use-cost is too high.
-Through a large scale of experiments, we propose a single multi-task model for conditional facial image generation and adjustment.
-The proposed model based on DCGAN, inspired by pix2pix and PGGAN.
-Major improvements are as follows.
-We share parameters between GAN and Adjustor,
-    reducing the size of the model and use-cost compared to two individual models.
-We adjust images in the image space,
-    reducing the loss of original image information.
-We propose a method of partition training,
-    making deep neural network easier to train.
-It is validated that the model can validly generate plausible facial images from attributes and be adjusted by attributes.
-Results also suggest that the use-cost of LittleGAN has declined.
-Compared to DCGAN and pix2pix, it can be more effectively applied to the actual production activity.
+In daily life, it is often necessary to communicate facial descriptions,
+    such as the description of a suspect by an eyewitness or of an client to a graphic designer. 
+However, the traditional method has some disadvantages and run-cost of existing machine learning model is too high.
+We propose a single multi-task model for conditional facial image generation and adjustment.
+The proposed model LittleGAN based on DCGAN, was inspired by pix2pix and PGGAN.
+With the goal of real applications, we share parameters between GAN and Adjustor,
+    reducing the size of the model and use-cost.
+We adjust images in the image space, using a feature map outside of latent space, reducing the loss of original image information. 
+%todo maximum
+We propose a new method of partition training, increasing deep neural networks(maxinmum)accuracy.
+Our experiments have validated the model’s ability to generate plausible facial images from attributes and be adjusted by attributes.
+Results also suggest that the runtime of LittleGAN has decreased.
+This means, compared to DCGAN and pix2pix, it is more appropriate for real-time production activity.
 
     \begin{IEEEkeywords}
         Facial Image Generation, Facial Image Adjustment, Generative Adversarial Networks, Machine Learning
