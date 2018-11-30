@@ -40,8 +40,8 @@ It can be seen that the image quality improves under the same training amount af
 \end{figure}
 
 In addition, we tested the effects of convolution kernel size and numbers of convolution filters on model performance and model size.
-Figure \ref{conv_filter_16}, Figure \ref{conv_filter_24}, and Figure \ref{conv_filter_32} are convolution filters using 16 times, 24 times, and 32 times,
-    respectively and the output results are completed after training 15 epochs.
+Figure \ref{conv_filter_16}, Figure \ref{conv_filter_24}, and Figure \ref{conv_filter_32} are test result that convolution filters using 16 times, 24 times, and 32 times,
+    respectively, they are completed after training 15 epochs.
 The times of convolution filter refers to the start amount of a convolution kernel.
 It will be doubled in each next layer of the decoder and the encoder.
 It can be seen that after the convolution filter number is lowered,
@@ -91,7 +91,10 @@ It can be seen that switching from a 5×5 convolution kernel to a 3×3 size caus
         \label{conv_kernel_3}
     \end{minipage}
 \end{figure}
-Otherwise, we have done loads of experimental comparison about parameter initializer, learning rate, noise dimension, noise distribution, activation function, loss function, network layers and training method to get a better model structure, sets of hyperparameters and training method.
+Otherwise, we have done loads of experimental comparison about parameter initializer,
+    learning rate, noise dimension, noise distribution, activation function,
+    loss function, network layers and training method to get a better model structure,
+    sets of hyperparameters and training method.
 
 \subsection{Model Overview}
 
@@ -107,8 +110,8 @@ It is as shown in Figure \ref{smliegan}.
 \end{figure}
 
 LittleGAN consists of 2 main components and 3 networks.
-The main components are the encoder and the decoder, used in 3 networks.
-The networks are the generator, the discriminator and the adjustor.
+The main components are the encoder and decoder, used in 3 networks.
+The networks are the generator, discriminator and adjustor.
 In LittleGAN, the generator generates facial images from noise and facial attributes,
     and then the adjustor combines it with new attributes to obtain new images.
 
@@ -116,7 +119,7 @@ In LittleGAN, the generator generates facial images from noise and facial attrib
 \subsection{Encoder and Decoder}
 
 
-Main components, the encoder and the decoder, are used for the converting between feature map and images.
+Main components, encoder and decoder, are used for the conversion of feature map and images.
 
 The encoder can extract features from the image from global to local.
 % local/global image feature please reference Baidu wiki
@@ -128,8 +131,8 @@ The convolution layer uses a 5×5 convolution kernel.
 Convolution filter number is 16 in the first layer, doubled in each next layer.
 The image dimension is reduced as the features are extracted by using the convolution with stride, leading to fewer computational load for each successive layer. 
 
-Instance Normalization\upcite{instance} is used as normalization layer.
-To preserve the image for more information, Leaky ReLU is used as the activation function.
+Instance Normalization\upcite{instance} is used as the normalization layer.
+To preserve the image for more information, Leaky ReLU\upcite{leaky} is used as the activation function.
 In order to prevent over-fitting,
     dropout\upcite{dropout} is used during each training batch to randomly select some neurons from each batch by to be hidden, thereby reducing the interaction between filters.
 
@@ -140,14 +143,14 @@ Also the same, normalization and activation are performed after each transposed 
 
 \subsection{Generator and Discriminator}
 
-Following the GAN network paradigm, LittleGAN also trains using the discriminator and the generator.
+Following the GAN network paradigm, LittleGAN also trains using a discriminator and a generator.
 The generator consists of a fully connected layer and the decoder.
 Facial attributes are combined with noise as input to generate images by the generator.
 The discriminator consists of the encoder and 2 fully connected layers.
 It uses images as input then extracts attributes and the probability of image comes from data.
 
 
-In the generator, through a fully connected layer, the input is transformed into feature map(in 4×4×512 size).
+In the generator, through a fully connected layer, the input is transformed into feature map(in 8×8×256 size).
 Then the image is generated from global to local by the decoder's layers.
 Finally a 3 filters convolution without stride is performed and used.
 The tanh activation function is used to obtain a three-channel (RGB) color image of 128×128×3 size.
@@ -180,7 +183,7 @@ On the other hand, feature map is connected to the same dimension as attribute,
 Figure \ref{net_discriminator} is the graph of generate network structure.
 
 % todo: continue here
-For the discriminator's loss function, since the Sigmoid is used to activate the output,
+As for the discriminator's loss function, since the Sigmoid is used to activate the output,
     in order to ensure that the network parameters will not dead,
     we expect the loss of the discriminator output to [0.02,0.98] instead of [0,1].
 Since discriminator not only outputs probability of image comes from data but also contains the facial attribute information implied by the image,
@@ -252,9 +255,9 @@ Our goal is to minimize the loss function of the generator and the discriminator
 
 \subsection{Adjustor Network}
 The adjustor consists of the decoder and the encoder from the GAN as well as several shortcut channels and a combined channel of adjustment conditions.
-It uses an the encoder to extract both global and local features with the first layer examining the whole image and each subsequent layer training on smaller portions. Each layer’s features are relayed to the equivalent layer of the decoder network through a shortcut channel.
+It uses the encoder to extract both global and local features with the first layer examining the whole image and each subsequent layer training on smaller portions. Each layer’s features are relayed to the equivalent layer of the decoder network through a shortcut channel.
 This allows each layer of the network to focus on data compression rather than the preservation of all the details found in the original image. 
-Adjuster uses the decoder to combine the extracted features and adjustment conditions step by step to generate an image from detail to global.
+Adjustor uses the decoder to combine the extracted features and adjustment conditions step by step to generate an image from detail to global.
 
 Figure \ref{net_adjustor} is the graph of generate network structure.
 
@@ -308,3 +311,4 @@ In practice, for the overall effect of the model,
 We set up separate optimizers for each set of parameters if use graph mode.
 Although this will take up more memory for the training device,
     it can reduce the CPU's burden that the optimizer frequently switches the optimization target and reconstructs the model.
+
