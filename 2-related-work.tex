@@ -23,11 +23,11 @@ PGGAN\upcite{pggan} first trains on low-resolution facial image, then gradually 
 \subsection{Image Translation}
 Image translation works with images as both inputs and outputs.
 Pix2pix\upcite{pix2pix} uses U-Net network, L1 Loss.
-Theirs generator contains a U-Net combining an encoder with a decoder,
+Their generator contains a U-Net combining an encoder with a decoder,
     reducing pressure on each network layer and retaining more original image information.
-Theirs discriminator uses L1 Loss to globally constrain images.
+Their discriminator uses L1 Loss to globally constrain images.
 In that case, pix2pix\upcite{pix2pix} can generate images better.
-CycleGAN\upcite{cyclegan} uses two generators and two discriminators to train separately achieving image conversion between two attribute domains.
+CycleGAN\upcite{cyclegan} uses two generators and two discriminators to train separately， achieving image conversion between two attribute domains.
 
 Whether it is pix2pix\upcite{pix2pix} or CycleGAN\upcite{cyclegan},
     although they can convert image attributes better,
@@ -36,13 +36,13 @@ If it is required to convert multiple attributes, multiple models are needed.
 In that case, model size and computational load are too large to meet actual needs.
 
 \subsection{Facial Image Adjustment}
-StarGAN\upcite{stargan} train across datasets so that the model can learn attributes and features from more datasets.
+StarGAN\upcite{stargan} trains across datasets so that the model can learn attributes and features from more datasets.
 It can generate images by specifying more attributes.
 AttGAN\upcite{attgan} extracts the attributes and noise of images,
-    change attributes and combine noise to generate images.
+    changes attributes and combines noise to generate images.
 It realizes adjustment of facial images.
 But the process of extracting attributes and noise will cause information loss.
-So, some features of original images will be lost in the adjusted images.
+Therefore, some features of original images will be lost in the adjusted images.
 TPGAN\upcite{tpgan} uses a variety of Loss to achieve the multi-angle transformation of facial images.
 Main method of the research is to build a facial outline and then add more details.
 
@@ -50,9 +50,9 @@ Main method of the research is to build a facial outline and then add more detai
 
 \vspace{3ex}
 
-From the above analysis of current situation,
+From the analysis of current situation above,
     we can learn that current facial image generation and adjustment in the face research are generally separate.
-Also, different models are required to be used.
+Also, various models are required to be used.
 The conversion of model is likely to cause certain information loss.
 Therefore, we hope to use one model to complete two tasks of facial image generation and adjustment.
 In this way, not only network parameters can be shared,

@@ -3,14 +3,13 @@
 In daily life, it is often necessary to communicate facial descriptions,
     such as the description of a suspect by an eyewitness or of an client to a graphic designer. 
 However, the traditional method has some disadvantages and run-cost of existing machine learning model is too high.
+
 We propose a single multi-task model for conditional facial image generation and adjustment.
 The proposed model LittleGAN based on DCGAN, was inspired by pix2pix and PGGAN.
 With the goal of real applications, we share parameters between GAN and Adjustor network,
     reducing the size of the model and use-cost.
-We adjust images in the image space, instead of extrcating all infomation into attributes and noise, reduce the loss of original image information. 
-%todo maximum
+We adjust images in the image space, instead of extrcating all infomation into attributes and noise, reducing the loss of original image information. 
 We propose a new method of partition training, alleviating the problem of vanishing gradients in previous layers of deep neural network.
-
 Our experiments have validated the model’s ability to generate plausible facial images from attributes and be adjusted by attributes.
 Results also suggest that the use-cost of LittleGAN has decreased.
 This means, compared to DCGAN and pix2pix, it is more appropriate for real-time production activity.

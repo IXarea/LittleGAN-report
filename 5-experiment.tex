@@ -1,14 +1,14 @@
 \section{Experiments}
 
 \subsection{Experiment Environment}
-We implemented our model using Python 3.6, Tensorflow 1.11 and Keras 2.2.
+We implemented our model using Python 3.6, Tensorflow 1.12 and Keras 2.2.
 The model was trained on a single NVIDIA TITAN X (Pascal) GPU platform with ubuntu installed.
 
 
 \subsection{Dataset}
 We use the public dataset CelebA\upcite{celeba}, which contains 202,599 facial images, and 40 labelled attributes for each face.
 We aligned and cropped the facial images into three-channel(RGB) images of 128×128 pixels and then divide them into training sets, test sets, and verification sets according to the ratio of 8:1:1.
-For the 40 attributes in the dataset, we select 4 of them: 'gender', 'skin color', 'hair color', 'beard' attribute to verify the feasibility of the model.
+For the 40 attributes in the dataset, we select 4 of them: 'gender', 'skin color', 'hair color', 'beard', 'waer glasses', 'young', 'rouge lips' attribute to verify the feasibility of the model.
 
 \subsection{Experimental Items}
 \begin{itemize}
@@ -60,7 +60,7 @@ It is also closer to the real image in color.
 Figure \ref{loss_part_on_d} and \ref{loss_dcgan_d} are the Discriminator's loss changes of LittleGAN and DCGAN\upcite{dcgan}.
 Figure \ref{loss_part_on_g} and \ref{loss_dcgan_g} are the Generator's loss changes of LittleGAN and DCGAN\upcite{dcgan}.
 To better measure the convergence speed of LittleGAN and DCGAN\upcite{dcgan}, we use the TensorBoard visualization tool to generate a loss map of the network during training.
-By comparison, it can be found that compared with DCGAN\upcite{dcgan}, the loss of our network changes more smoothly, the jitter is smaller and is steadily decreasing.
+By comparison, it can be found that compared with DCGAN\upcite{dcgan}, the loss of our network changes more smoothly, the variance is smaller and is steadily decreasing.
 While DCGAN\upcite{dcgan} often appears to have a fitting and lead to a sudden increase in loss.
 
 \begin{figure}
