@@ -8,13 +8,13 @@ The model is trained on a single NVIDIA TITAN X (Pascal) GPU in each experiment 
 \subsection{Dataset}
 We use the public dataset CelebA\upcite{celeba}, which contains 202,599 facial images and 40 labelled attributes for each face.
 We align and crop the facial images into three-channel(RGB) images of 128×128 pixels and then divide them into training sets, test sets and verification sets according to the ratio of 8:1:1.
-For the 40 attributes in the dataset, we select 7 of them: 'gender', 'skin color', 'hair color', 'beard', 'wear glasses', 'young', 'lipstick' attribute to verify the feasibility of the model.
+For the 40 attributes in the dataset, we select 7 of them: 'gender', 'skin tone', 'hair color', 'beard', 'wear glasses', 'young', 'lipstick' attribute to verify the feasibility of the model.
 
 \subsection{Experimental Items}
 \begin{itemize}
 \item In order to obtain a suitable model structure and training hyperparameters, we have designed multiple sets of comparative experiments to test the effects of different improvement projects.
 \item In order to verify that our model can generate plausible facial images according to input conditions and it has practicability, we have set up experiments of generating and adjusting facial images.
-\item To prove that our method is cheaper to use, we have also set up a set of model size comparison experiments.
+\item To prove our method owns lower use-cost, we have also set up a set of model size comparison experiments.
 \end{itemize}
 
 \subsection{Training Details}
