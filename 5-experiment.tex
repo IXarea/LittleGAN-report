@@ -6,9 +6,9 @@ The model was trained on a single NVIDIA TITAN X (Pascal) GPU platform with ubun
 
 
 \subsection{Dataset}
-We use the public dataset CelebA\upcite{celeba}, which contains 202,599 facial images, and 40 labelled attributes for each face.
-We aligned and cropped the facial images into three-channel(RGB) images of 128×128 pixels and then divide them into training sets, test sets, and verification sets according to the ratio of 8:1:1.
-For the 40 attributes in the dataset, we select 4 of them: 'gender', 'skin color', 'hair color', 'beard', 'waer glasses', 'young', 'rouge lips' attribute to verify the feasibility of the model.
+We use the public dataset CelebA\upcite{celeba}, which contains 202,599 facial images and 40 labelled attributes for each face.
+We aligned and cropped the facial images into three-channel(RGB) images of 128×128 pixels and then divided them into training sets, test sets and verification sets according to the ratio of 8:1:1.
+For the 40 attributes in the dataset, we select 7 of them: 'gender', 'skin color', 'hair color', 'beard', 'wear glasses', 'young', 'lipstick' attribute to verify the feasibility of the model.
 
 \subsection{Experimental Items}
 \begin{itemize}
@@ -20,16 +20,16 @@ For the 40 attributes in the dataset, we select 4 of them: 'gender', 'skin color
 \subsection{Training Details}
 
 We use the Adam\upcite{adam} optimizer to optimize the network.
-The learning rates of discriminator, generator and adjustor network are set to $1\times10^{-4}$.
+The learning rates of the discriminator, the generator and the adjustor network are set to $1\times10^{-4}$.
 $\beta1$ and $\beta2$ select the default configuration in Adam's\upcite{adam} paper, which is respectively 0.5 and 0.9.
-Encoder network is freezed when training adjustor network.
-The $\lambda$ in both generator and adjustor network is set to 0.02.
+The encoder network is freezed when training the adjustor network.
+The $\lambda$ in both the generator and the adjustor network is set to 0.02.
 We use 100-dimensional latent vector as input.
 Use 32 images training set for training.
 A total of 25 training sessions are used.
-In each batch, generator is used to generate the image first.
-Then discriminator is used to identify the image and adjusted by adjustor network.
-The calculation results above are on gradient penalization and the respective losses of discriminator, generator, and adjustor network are calculated.
+In each batch, the generator is used to generate the image first.
+Then the discriminator is used to identify the image and adjusted by the adjustor network.
+The calculation results above are on gradient penalization and the respective losses of the discriminator, the generator, and the adjustor network are calculated.
 Then the respective optimizers separately performs backpropagation and optimizes network weight parameters.
 In the partition training, the overall model training and the partition training are performed in a 4:1 ratio.
 
@@ -133,7 +133,7 @@ Our network is able to adjust the specified features of the facial image.
 \subsubsection*{Faster Convergence}
 Fig.\ref{loss_part_on_d}, Fig.\ref{loss_part_on_g}, and Fig.\ref{loss_part_on_u} show the changes of the loss of each components that turn partition training off, respectively.
 Fig.\ref{loss_part_off_d}, Fig.\ref{loss_part_off_g}, and Fig.\ref{loss_part_off_u} show the changes of the loss of each components that turn partition training off, respectively.
-It can be seen that the loss of generator reaches the balance faster after partition training is started and the loss of discriminator also has a small amplitude and becomes stable.
+It can be seen that the loss of the generator reaches the balance faster after partition training is started and the loss of the discriminator also has a small amplitude and becomes stable.
 Figure \ref{part_on} and Figure \ref{part_off} show the test output of the partition training on and off, respectively.
 after training 20 epochs, with partition training on, image quality is improved under the same training amount.
 
@@ -199,3 +199,23 @@ It can be seen that the size of LittleGAN is smaller and LittleGAN costs less.
     \label{result_model_size}
     \end{center}
 \end{figure}
+
+\begin{table}
+    \centering
+    \caption{FID Metric Comparison}
+    \label{result_fid}
+    \begin{tabu}{c|[1pt]ccccc}
+        \hline
+     Experiment Name & Kernel Size & Filter Number & Partition Training & Normalization & FID            \\ \hline
+        Basic        & 3x3         & 24x           & $\surd$            & Instance      & 57.94$\pm$0.09 \\
+        Batch        & 3x3         & 24x           & $\surd$            & Batch         & 59.35$\pm$0.64 \\
+        16x Filter   & 3x3         & 16x           & $\surd$            & Instance      & 62.82$\pm$0.40 \\
+        48x Filter   & 3x3         & 48x           & $\surd$            & Instance      & 59.35$\pm$0.42 \\
+        Size 5x5     & 5x5         & 24x           & $\surd$            & Instance      & 56.99$\pm$0.24 \\
+        No Partition & 3x3         & 24x           & $\times$           & Instance      & 64.22$\pm$0.46 \\ \hline
+        DCGAN        & 5x5         & 64x           & $\times$           & Batch         & 77.57$\pm$1.27 \\ \hline
+        VAE (64x64)  & -           & -             & $\times$           & -             & 85.7 $\pm$3.8  \\
+        BEGAN (64x64) & 3x3        & 128x          & $\times$           & -             & 38.9 $\pm$0.9  \\
+        WGAN-GP (64x64) & 5x5      & 128x          & $\times$           & Batch         & 30.0 $\pm$1.0  \\ \lasthline
+    \end{tabu}
+\end{table}

@@ -43,7 +43,7 @@ In addition, we tested the effects of convolution kernel size and numbers of con
 Figure \ref{conv_filter_16}, Figure \ref{conv_filter_24}, and Figure \ref{conv_filter_32} are convolution filters using 16 times, 24 times, and 32 times,
     respectively and the output results are completed after training 15 epochs.
 The times of convolution filter refers to the start amount of a convolution kernel.
-It will be doubled in each next layer of decoder and encoder.
+It will be doubled in each next layer of the decoder and the encoder.
 It can be seen that after the convolution filter number is lowered,
     the image quality does not decrease markedly under the same training amount.
 In order to reduce the size of the model to limit use-cost,
@@ -107,18 +107,18 @@ It is as shown in Figure \ref{smliegan}.
 \end{figure}
 
 LittleGAN consists of 2 main components and 3 networks.
-The main components are the encoder and decoder, used in 3 networks.
-The networks are the generator, discriminator and adjustor.
+The main components are the encoder and the decoder, used in 3 networks.
+The networks are the generator, the discriminator and the adjustor.
 In LittleGAN, the generator generates facial images from noise and facial attributes,
-    and then adjustor combines it with new attributes to obtain new images.
+    and then the adjustor combines it with new attributes to obtain new images.
 
 
 \subsection{Encoder and Decoder}
 
 
-Main components, encoder and decoder, are used for the converting between feature map and images.
+Main components, the encoder and the decoder, are used for the converting between feature map and images.
 
-An encoder can extract features from the image from global to local.
+The encoder can extract features from the image from global to local.
 % local/global image feature please reference Baidu wiki
 Using convolution, starting from an image of 128×128×3 (height × width × channels),
     the convolution with stride is continuously performed.
@@ -126,29 +126,29 @@ After each convolution, normalization, activation and dropout\upcite{dropout} ar
 
 The convolution layer uses a 5×5 convolution kernel.
 Convolution filter number is 16 in the first layer, doubled in each next layer.
-The image dimension is reduced when the feature is extracted by using the convolution with stride.
-Also, the network has lower computational load.
+The image dimension is reduced as the features are extracted by using the convolution with stride, leading to fewer computational load for each successive layer. 
+
 Instance Normalization\upcite{instance} is used as normalization layer.
 To preserve the image for more information, Leaky ReLU is used as the activation function.
-In order to prevent occurrence of over-fitting,
-    dropout\upcite{dropout} is used in the training to randomly hide some neurons to reduce the interaction between filters.
+In order to prevent over-fitting,
+    dropout\upcite{dropout} is used during each training batch to randomly select some neurons from each batch by to be hidden, thereby reducing the interaction between filters.
 
-Decoder is used to generate an image from the feature map.
-Using transposed convolution, the same number of filters,
-    stride and convolution kernel are symmetrically used with the encoder.
-Normalization and activation are performed after each transposed convolution as the same as the encoder.
+After the encoder outputs a feature map, it is read by the decoder to generate an image.
+Using transposed convolution, the decoder uses the same number of filters,
+    strides and convolution kernels as the encoder.
+Also the same, normalization and activation are performed after each transposed convolution.
 
 \subsection{Generator and Discriminator}
 
-We also name the combination of discriminator and generator as GAN.
-Generator consists of a fully connected layer and a decoder.
-The facial attributes are combined with noise as input to generate images by generator.
-Discriminator consists of an encoder and 2 fully connected layers.
+Following the GAN network paradigm, LittleGAN also trains using the discriminator and the generator.
+The generator consists of a fully connected layer and the decoder.
+Facial attributes are combined with noise as input to generate images by the generator.
+The discriminator consists of the encoder and 2 fully connected layers.
 It uses images as input then extracts attributes and the probability of image comes from data.
 
 
-In generator, through a fully connected layer, the input is transformed into feature map(in 4×4×512 size).
-Then the image is generated from global to local by decoder layers.
+In the generator, through a fully connected layer, the input is transformed into feature map(in 4×4×512 size).
+Then the image is generated from global to local by the decoder's layers.
 Finally a 3 filters convolution without stride is performed and used.
 The tanh activation function is used to obtain a three-channel (RGB) color image of 128×128×3 size.
 Figure \ref{net_generator} is the graph of generate network structure.
@@ -169,7 +169,7 @@ Figure \ref{net_generator} is the graph of generate network structure.
     \end{minipage}
 \end{figure}
 
-Discriminator use encoder to extracts the feature map from the input image first.
+The discriminator use the encoder to extracts the feature map from the input image first.
 Then on the one hand, the feature map is connected to the dimension 1 through a fully connected layer.
 The Sigmoid activation function is used to normalize the result to [0,1],
     which indicates the possibility that the image comes from real data.
@@ -180,15 +180,15 @@ On the other hand, feature map is connected to the same dimension as attribute,
 Figure \ref{net_discriminator} is the graph of generate network structure.
 
 % todo: continue here
-For discriminator loss function, since the Sigmoid is used to activate the output,
+For the discriminator's loss function, since the Sigmoid is used to activate the output,
     in order to ensure that the network parameters will not dead,
-    we expect the loss of discriminator output to [0.02,0.98] instead of [0,1].
+    we expect the loss of the discriminator output to [0.02,0.98] instead of [0,1].
 Since discriminator not only outputs probability of image comes from data but also contains the facial attribute information implied by the image,
     its loss includes the GAN loss and the conditional judgment loss.
-In discriminator, we expect the output from real image close to 0.98, while the output from fake image close to 0.02.
-Similarly, we expect the facial attribute information output by discriminator is as consistent as possible with the real data.
+In the discriminator, we expect the output from real image close to 0.98, while the output from fake image close to 0.02.
+Similarly, we expect the facial attribute information output by the discriminator is as consistent as possible with the real data.
 Equation \eqref{loss_d_gan}, Equation \eqref{loss_d_c}, and Equation \eqref{loss_d} are the GAN loss,
-    conditional adjustment loss and total loss of discriminator, respectively.
+    conditional adjustment loss and total loss of the discriminator, respectively.
 
 % Todo: Add comment for equation
 \begin{equation}
@@ -212,13 +212,13 @@ Equation \eqref{loss_d_gan}, Equation \eqref{loss_d_c}, and Equation \eqref{loss
     \label{loss_d}
 \end{equation}
 
-We add a mean absolute error to generator's loss function.
+We add a mean absolute error to the generator's loss function.
 We expect overall color and layout to be more realistic while keeping the diversity generation results in this way.
-The target of generator is to generate an image that treat the discriminator think it's from real data,
-    and let discriminator output the attribute close to generation condition.
-Therefore, the loss function of generator include into discriminator loss and the mean absolute error loss.
+The two goals of the generator is to generate an image that tricks the discriminator into labeling the forgery as real data,
+    and to have the discriminator output an attribute close to generation condition.
+Therefore, the loss function of the generator includes into the discriminator's loss and the mean absolute error loss.
 Equation \eqref{loss_g_gan}, Equation \eqref{loss_g_l1}, and Equation \eqref{loss_g} are the discriminator loss,
-    mean absolute error loss and total loss of generator, respectively.
+    mean absolute error loss and total loss of the generator, respectively.
 The $\lambda$ in the total loss in the experiment is 0.02.
 
 \begin{equation}
@@ -241,8 +241,8 @@ The $\lambda$ in the total loss in the experiment is 0.02.
     \label{loss_g}
 \end{equation}
 
-Our goal is to minimize the loss function of generator and discriminator,
-    so the optimization goal of generator against the network is Equation \eqref{gan_target}
+Our goal is to minimize the loss function of the generator and the discriminator,
+    so the optimization goal of the generator against the network is Equation \eqref{gan_target}
 
 \begin{equation}
     GAN^*=\arg \min_{C,D} \max_{G}Loss_{D}(C,D,G)+Loss_{G}(C,D,G)
@@ -251,10 +251,9 @@ Our goal is to minimize the loss function of generator and discriminator,
 
 
 \subsection{Adjustor Network}
-Adjustor consists of a decoder, an encoder, several shortcut channels and a combined channel of adjustment conditions.
-It uses an encoder to extract features from global to detail,
-    and transmits each layer feature to the decoder network through a shortcut channel.
-This makes each layer of the network does not need to carry all the information of the image.
+The adjustor consists of the decoder and the encoder from the GAN as well as several shortcut channels and a combined channel of adjustment conditions.
+It uses an the encoder to extract both global and local features with the first layer examining the whole image and each subsequent layer training on smaller portions. Each layer’s features are relayed to the equivalent layer of the decoder network through a shortcut channel.
+This allows each layer of the network to focus on data compression rather than the preservation of all the details found in the original image. 
 Adjuster uses the decoder to combine the extracted features and adjustment conditions step by step to generate an image from detail to global.
 
 Figure \ref{net_adjustor} is the graph of generate network structure.
@@ -267,10 +266,10 @@ Figure \ref{net_adjustor} is the graph of generate network structure.
     \end{center}
 \end{figure}
 
-In adjustor network, the decoder and encoder parameters are shared with GAN's.
-We use GAN loss and absolute mean error as a loss function for adjustor network.
+In the adjustor network, the decoder and the encoder parameters are shared with GAN's.
+We use GAN loss and absolute mean error as a loss function for the adjustor network.
 Equation \eqref{loss_a_gan}, Equation \eqref{loss_a_l1}, and Equation \eqref{loss_u} are the GAN loss,
-    mean absolute error loss and total loss of adjustor, respectively.
+    mean absolute error loss and total loss of the adjustor, respectively.
 
 \begin{equation}
     Loss_{A-GAN}(C,D,A)=
@@ -294,7 +293,7 @@ Equation \eqref{loss_a_gan}, Equation \eqref{loss_a_l1}, and Equation \eqref{los
 
 \subsection{Model Training}
 There are two main improvements to the training method of the model:
-    applying the gradient penalty\upcite{wgan-gp} to discriminator,
+    applying the gradient penalty\upcite{wgan-gp} to the discriminator,
     improving the convergence speed and the stability;
     using the partition training that proposed by us,
     enables the network to adjust the previous network layer more effectively,

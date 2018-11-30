@@ -14,7 +14,7 @@ Our baseline model, DCGAN, is a type of GAN that uses convolutions to replace fu
 \subsection{Image Generation}
 
 Text-to-Image\upcite{text2img} is a method based on DCGAN\upcite{dcgan} for generating images from text description.
-They combine embeded description with noise to generate images through convolution.
+They combine embedded description with noise to generate images through convolution.
 InfoGAN\upcite{infogan} is able to extract attributes from images, enabling conditional generation of images through unsupervised learning.
 % BEGAN\upcite{began} use a variational auto-encoder as the discriminator.
 % It provides a hyperparameter to adjust the balance between image variety and quality while maintaining training stability.
@@ -27,7 +27,7 @@ Their generator contains a U-Net combining an encoder with a decoder,
     reducing pressure on each network layer and retaining more original image information.
 Their discriminator uses L1 Loss to globally constrain images.
 In that case, pix2pix\upcite{pix2pix} can generate images better.
-CycleGAN\upcite{cyclegan} uses two generators and two discriminators to train separately， achieving image conversion between two attribute domains.
+CycleGAN\upcite{cyclegan} uses two generators and two discriminators to train separately, achieving image conversion between two attribute domains.
 
 Whether it is pix2pix\upcite{pix2pix} or CycleGAN\upcite{cyclegan},
     although they can convert image attributes better,
