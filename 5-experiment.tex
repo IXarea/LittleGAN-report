@@ -32,7 +32,7 @@ A total of 20 training sessions are used.
 In each batch, the generator is used to generate the image first.
 Then the discriminator is used to identify the image and adjusted by the adjustor network.
 The calculation results of discriminator are on gradient penalty.
-The losses of the discriminator, the generator and the adjustor network are calculated respectively. 
+The losses of the discriminator, the generator and the adjustor network are calculated respectively.
 Then the respective optimizers separately performs backpropagation and optimizes network weight parameters.
 In the partition training, the overall model training and the partition training are performed in a 4:1 ratio.
 
@@ -50,35 +50,6 @@ To compute the FID score for a unconditional model, 30k samples are randomly gen
 
 \subsection{Experiment Result}
 \subsubsection*{More Efficient Generation}
-
-
-Table \ref{result_speed} shows that the image generation speed of LittleGAN and DCGAN\upcite{dcgan}.
-It runs on the computer with an Intel Core i7-6700 CPU.
-It shows that the generate speed of LittleGAN is much faster.
-It also means that LittleGAN will get higher real-time performance when deployed on computer or mobile devices.
-
-\begin{table}
-    \caption{Generate Speed Comparison}
-    \label{result_speed}
-    \centering 
-    
-    \begin{threeparttable}
-        \begin{tabular}{c|c}
-            \hline
-            Experiment Name & Time       \\ \hline
-            DCGAN        &  11.50s$\pm$0.21s\\
-            Final\tnote{*}        &  3.29s$\pm$0.20s\\
-            16x-Filter\tnote{*}        & 2.02$\pm$0.14s \\
-            Size-5x5\tnote{*}        &  4.85s$\pm$0.07s\\
-            48x-Filter\tnote{*}        & 9.91s$\pm$0.25s  \\ \hline
-        \end{tabular}
-
-        \begin{tablenotes}
-            \item The 200 facial image generation time usage of LittleGAN and DCGAN.
-            \item[*] This means the experiment model is LittleGAN.
-        \end{tablenotes}
-    \end{threeparttable}
-\end{table}
 Table \ref{result_fid} shows the FID metric of each model.
 Lower is better for the metric.
 The result of LittleGAN is after training 20 epochs.
@@ -110,16 +81,40 @@ In that case, their metrics will be much bigger at the same condition of ours.
         DCGAN        & 5x5         & 64x           & $\times$           & Batch         & 77.57$\pm$1.27 \\ \hline
         VAE(64x64)   & -           & -             & $\times$           & -             & 85.7 $\pm$3.8**  \\
         BEGAN(64x64) & 3x3         & 128x          & $\times$           & -             & 38.9 $\pm$0.9**  \\
-        WGAN-GP(64x64) & 5x5       & 128x          & $\times$           & Batch         & 30.0 $\pm$1.0**  \\ \lasthline
+        WGAN-GP(64x64) & 5x5       & 128x          & $\times$           & Batch         & 30.0 $\pm$1.0**  \\ \hline
     \end{tabular}
-    
-    \footnote{}
     \begin{tablenotes}
         \item The FID metric comparison between serval models.
         \item[*] This means the experiment model is LittleGAN.
-        \item[**] this means the FID result is calculated by the paper from Google Brain "Are GANs Created Equal? A Large-Scale Study" 
+        \item[**] this means the FID result is calculated by the paper from Google Brain "Are GANs Created Equal? A Large-Scale Study"
     \end{tablenotes}
 \end{threeparttable}
+\end{table}
+
+Table \ref{result_speed} shows that the image generation speed of LittleGAN and DCGAN\upcite{dcgan}.
+It runs on the computer with an Intel Core i7-6700 CPU.
+It shows that the generate speed of LittleGAN is much faster.
+It also means that LittleGAN will get higher real-time performance when deployed on computer or mobile devices.
+
+\begin{table}
+    \caption{Generate Speed Comparison}
+    \label{result_speed}
+    \centering
+    \begin{threeparttable}
+        \begin{tabular}{c|c}
+            \hline
+            Experiment Name & Time       \\ \hline
+            DCGAN        &  11.50s$\pm$0.21s\\
+            Final\tnote{*}        &  3.29s$\pm$0.20s\\
+            16x-Filter\tnote{*}        & 2.02$\pm$0.14s \\
+            Size-5x5\tnote{*}        &  4.85s$\pm$0.07s\\
+            48x-Filter\tnote{*}        & 9.91s$\pm$0.25s  \\ \hline
+        \end{tabular}
+        \begin{tablenotes}
+            \item The 200 facial image generation time usage of LittleGAN and DCGAN.
+            \item[*] This means the experiment model is LittleGAN.
+        \end{tablenotes}
+    \end{threeparttable}
 \end{table}
 
 
@@ -191,8 +186,7 @@ Our network is able to adjust the specified features of the facial image.
 
 \begin{figure}
     \begin{center}
-    \includegraphics[width=0.49\textwidth]{figures/result_adjust_1.png}
-    \includegraphics[width=0.49\textwidth]{figures/result_adjust_2.png}
+    \includegraphics[width=\textwidth]{figures/result_adjust.png}
     \caption{Adjustment test result of LittleGAN's Adjustor}
     \label{adjust}
     \end{center}

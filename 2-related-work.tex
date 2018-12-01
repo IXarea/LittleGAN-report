@@ -2,23 +2,32 @@
 
 
 \subsection{Generative Adversarial Network}
-Generative Adversarial Networks (GAN) consists of two networks, the generator and discriminator.
-The training process is a competition between the generator and discriminator.
-The discriminator is trained to separate data from the generator from the training set,
-    while the generator changes itself to let discriminator believe its output coming from real data.
-In that way, the generator achieves the goal of imitating the training dataset.
 
-Our baseline model, DCGAN, is a type of GAN that uses convolutions to replace fully connected layers for a more stable training process.
+Generative Adversarial Networks (GAN) were proposed by Goodfellow \emph{et al}.\upcite{gan}.
+In the original setting, GAN are composed of a generator and a discriminator that are trained with competing goals.
+The generator is trained to generate samples towards the true data distribution to fool the discriminator,
+    while the discriminator is optimized to distinguish between real samples
+    from the true data distribution and fake samples produced by the generator.\upcite{stackgan}
+Recently, GAN have shown great potential in simulating complex data distributions.
+
+
+
+Our baseline will be Deep Convolution GAN(DCGAN).
+It uses convolutions to replace fully connected layers for a more stable training process.
+
+
 
 
 \subsection{Image Generation}
 
 Text-to-Image\upcite{text2img} is a method based on DCGAN\upcite{dcgan} for generating images from text description.
 They combine embedded description with noise to generate images through convolution.
-InfoGAN\upcite{infogan} is able to extract attributes from images, enabling conditional generation of images through unsupervised learning.
+InfoGAN\upcite{infogan} is able to extract attributes from images,
+    enabling conditional generation of images through unsupervised learning.
 % BEGAN\upcite{began} use a variational auto-encoder as the discriminator.
 % It provides a hyperparameter to adjust the balance between image variety and quality while maintaining training stability.
-PGGAN\upcite{pggan} first trains on low-resolution facial image, then gradually adds network layers for training to improve the resolution of output images and the stability of the network.
+PGGAN\upcite{pggan} first trains on low-resolution facial image,
+    then gradually adds network layers for training to improve the resolution of output images and the stability of the network.
 
 \subsection{Image Translation}
 Image translation works with images as both inputs and outputs.

@@ -1,4 +1,4 @@
-\documentclass[conference,12pt,a4paper,compsoc,onecolumn]{IEEEtran}
+\documentclass[journal,12pt,a4paper,compsoc,onecolumn]{IEEEtran}
 \IEEEoverridecommandlockouts
 \usepackage{cite}
 \usepackage[colorlinks,linkcolor=black,anchorcolor=blue,citecolor=red]{hyperref}
@@ -9,8 +9,9 @@
 \usepackage{xcolor}
 \usepackage{amssymb}
 \usepackage{subcaption}
-\usepackage{tabu}
 \usepackage{threeparttable}
+\usepackage{pdfpages}
+\usepackage{hyperref}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}}
@@ -19,11 +20,20 @@
 
 \title{LittleGAN: Conditional Facial Image Generation and Adjustment}
 \author{Yongxiang Meng and Wenyan Chen\\Guangzhou No.6 Middle School, China}
+\hypersetup{
+	pdftitle=LittleGAN: Conditional Facial Image Generation and Adjustment,
+	pdfauthor=Yongxiang Meng and Wenyan Chen
+}
+
+
+\includepdf[noautoscale]{attach/info.pdf}
+
 
 \maketitle
+\input{0-abstract-and-keywords}
+\newpage
 \tableofcontents
-
-\include{0-abstract-and-keywords}
+\newpage
 \input{1-introduction}
 \input{2-related-work}
 \input{3-goal-and-highlight}
@@ -37,6 +47,6 @@
 
 \include{acknowledgement}
 
-
+\includepdf[noautoscale]{attach/declaration.pdf}
 \end{document}
 

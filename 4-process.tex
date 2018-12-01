@@ -129,12 +129,14 @@ After each convolution, normalization, activation and dropout\upcite{dropout} ar
 
 The convolution layer uses a 5×5 convolution kernel.
 Convolution filter number is 16 in the first layer, doubled in each next layer.
-The image dimension is reduced as the features are extracted by using the convolution with stride, leading to fewer computational load for each successive layer. 
+The image dimension is reduced as the features are extracted by using the convolution with stride,
+    leading to fewer computational load for each successive layer.
 
 Instance Normalization\upcite{instance} is used as the normalization layer.
 To preserve the image for more information, Leaky ReLU\upcite{leaky} is used as the activation function.
 In order to prevent over-fitting,
-    dropout\upcite{dropout} is used during each training batch to randomly select some neurons from each batch by to be hidden, thereby reducing the interaction between filters.
+    dropout\upcite{dropout} is used during each training batch to randomly select some neurons from each batch by to be hidden,
+    thereby reducing the interaction between filters.
 
 After the encoder outputs a feature map, it is read by the decoder to generate an image.
 Using transposed convolution, the decoder uses the same number of filters,
@@ -255,8 +257,9 @@ Our goal is to minimize the loss function of the generator and the discriminator
 
 \subsection{Adjustor Network}
 The adjustor consists of the decoder and the encoder from the GAN as well as several shortcut channels and a combined channel of adjustment conditions.
-It uses the encoder to extract both global and local features with the first layer examining the whole image and each subsequent layer training on smaller portions. Each layer’s features are relayed to the equivalent layer of the decoder network through a shortcut channel.
-This allows each layer of the network to focus on data compression rather than the preservation of all the details found in the original image. 
+It uses the encoder to extract both global and local features with the first layer examining the whole image and each subsequent layer training on smaller portions.
+Each layer’s features are relayed to the equivalent layer of the decoder network through a shortcut channel.
+This allows each layer of the network to focus on data compression rather than the preservation of all the details found in the original image.
 Adjustor uses the decoder to combine the extracted features and adjustment conditions step by step to generate an image from detail to global.
 
 Figure \ref{net_adjustor} is the structure graph of adjustor network.
