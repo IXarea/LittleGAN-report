@@ -12,7 +12,7 @@ Recently, GAN have shown great potential in simulating complex data distribution
 
 
 
-Our baseline will be Deep Convolution GAN(DCGAN).
+Our baseline is Deep Convolution GAN(DCGAN).
 It uses convolutions to replace fully connected layers for a more stable training process.
 
 
@@ -36,7 +36,7 @@ Their generator contains a U-Net combining an encoder with a decoder,
     reducing pressure on each network layer and retaining more original image information.
 Their discriminator uses L1 Loss to globally constrain images.
 In that case, pix2pix\upcite{pix2pix} can generate images better.
-CycleGAN\upcite{cyclegan} uses two generators and two discriminators to train separately, achieving image conversion between two attribute domains.
+% CycleGAN\upcite{cyclegan} uses two generators and two discriminators to train separately, achieving image conversion between two attribute domains.
 
 Whether it is pix2pix\upcite{pix2pix} or CycleGAN\upcite{cyclegan},
     although they can convert image attributes better,
@@ -49,7 +49,7 @@ StarGAN\upcite{stargan} trains across datasets so that the model can learn attri
 It can generate images by specifying more attributes.
 AttGAN\upcite{attgan} extracts the attributes and noise of images,
     changes attributes and combines noise to generate images.
-It can accurately edit facial attributes.\upcite{attgan}
+It can accurately edit facial attributes.
 But the process of extracting attributes and noise will cause information loss.
 Therefore, some features of original images will be lost in the adjusted images.
 TPGAN\upcite{tpgan} uses a variety of Loss to achieve the multi-angle transformation of facial images.

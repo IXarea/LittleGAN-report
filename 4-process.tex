@@ -1,6 +1,6 @@
 \section{Process}
 \subsection{Overall Roadmap}
-%todo
+
 In order to obtain a smaller model, less training and better performance,
     we decided to make several improvements of models and training based on DCGAN\upcite{dcgan}.
 
@@ -44,10 +44,11 @@ Figure \ref{conv_filter_16}, Figure \ref{conv_filter_24}, and Figure \ref{conv_f
     respectively, they are completed after training 15 epochs.
 The times of convolution filter refers to the start amount of a convolution kernel.
 It will be doubled in each next layer of the decoder and the encoder.
-It can be seen that after the convolution filter number is lowered,
+It can be seen that after the convolution filter number is lowered to 24x from 32x,
     the image quality does not decrease markedly under the same training amount.
-In order to reduce the size of the model to limit use-cost,
-    we finally chose a 16 times convolution filters.
+But when the number decreases to 16x, the model dons't performs as well as 24x and 32x.
+In order to keep the balacne between use-cost and performance,
+    we finally chose a 24 times convolution filters.
 
 \begin{figure}
     \begin{minipage}[t]{0.48\linewidth}
@@ -72,7 +73,7 @@ In order to reduce the size of the model to limit use-cost,
 \end{figure}
 
 Figure \ref{conv_kernel_5} and \ref{conv_kernel_3} show the results after training 4 epochs of the 5×5 and 3×3 (transposed) convolution kernel,
-    respectively, under a 16 times convolution filter.
+    respectively, under a 24 times convolution filter.
 It can be seen that switching from a 5×5 convolution kernel to a 3×3 size causes the image quality to degrade within an acceptable range,
     so we choose a 3×3 convolution kernel.
 
@@ -128,7 +129,7 @@ Using convolution, starting from an image of 128×128×3 (height × width × cha
 After each convolution, normalization, activation and dropout\upcite{dropout} are used.
 
 The convolution layer uses a 5×5 convolution kernel.
-Convolution filter number is 16 in the first layer, doubled in each next layer.
+Convolution filter number is 24 in the first layer, doubled in each next layer.
 The image dimension is reduced as the features are extracted by using the convolution with stride,
     leading to fewer computational load for each successive layer.
 
@@ -152,8 +153,8 @@ The discriminator consists of the encoder and 2 fully connected layers.
 It uses images as input then extracts attributes and the probability of image comes from data.
 
 
-In the generator, through a fully connected layer, the input is transformed into feature map(in 8×8×256 size).
-Then the image is generated from global to local by the decoder's layers.
+In the generator, through a fully connected layer, the input are transformed into feature map(in 8×8×256 size).
+Then the image is generated from local to global by the decoder's layers.
 Finally a 3 filters convolution without stride is performed and used.
 The tanh activation function is used to obtain a three-channel (RGB) color image of 128×128×3 size.
 Figure \ref{net_generator} is the structure graph of generate network.
@@ -173,15 +174,9 @@ Figure \ref{net_generator} is the structure graph of generate network.
         \label{net_discriminator}
     \end{minipage}
 \end{figure}
-
-The discriminator use the encoder to extracts the feature map from the input image first.
-Then on the one hand, the feature map is connected to the dimension 1 through a fully connected layer.
-The Sigmoid activation function is used to normalize the result to [0,1],
-    which indicates the possibility that the image comes from real data.
-On the other hand, feature map is connected to the same dimension as attribute,
-    the latent facial attribute information is extracted,
-    and the result is also normalized to [0,1] using the Sigmoid,
-    thereby indicating the possibility that the image has these facial attributes.
+The discriminator uses the encoder to extract the feature map from the input image first. The feature map then goes through a fully connected layer to the result.
+Then on one hand,  the result turns to the probability indicating that the image comes from real data. It uses the Sigmoid activation function to normalize the result to [0,1],
+On the other hand, the result turns to attributes, also normalized to [0,1] using the Sigmoid.
 Figure \ref{net_discriminator} is the structure graph of discriminator network.
 
 % todo: continue here
@@ -255,9 +250,9 @@ Our goal is to minimize the loss function of the generator and the discriminator
 \end{equation}
 
 
-\subsection{Adjustor Network}
+\subsection{Adjustor Network}%todo equivalent
 The adjustor consists of the decoder and the encoder from the GAN as well as several shortcut channels and a combined channel of adjustment conditions.
-It uses the encoder to extract both global and local features with the first layer examining the whole image and each subsequent layer training on smaller portions.
+It uses the encoder to extract both global and local features.
 Each layer’s features are relayed to the equivalent layer of the decoder network through a shortcut channel.
 This allows each layer of the network to focus on data compression rather than the preservation of all the details found in the original image.
 Adjustor uses the decoder to combine the extracted features and adjustment conditions step by step to generate an image from detail to global.
@@ -297,7 +292,7 @@ Equation \eqref{loss_a_gan}, Equation \eqref{loss_a_l1}, and Equation \eqref{los
     \label{loss_u}
 \end{equation}
 
-\subsection{Model Training}
+\subsection{Model Training}%todo Gradient Clipping instead of gradient penalty 
 There are two main improvements to the training method of the model:
     We apply the gradient penalty\upcite{wgan-gp} to the discriminator, improving the convergence speed and the stability;
     We use the partition training that proposed by us,
