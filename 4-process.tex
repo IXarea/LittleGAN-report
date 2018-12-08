@@ -104,7 +104,7 @@ It is as shown in Figure \ref{smliegan}.
 
 \begin{figure}
     \begin{center}
-    \includegraphics[width=\textwidth]{figures/model.pdf}
+    \includegraphics[width=\textwidth]{figures/architecture.pdf}
     \caption{The Model of LittleGAN}
     \label{smliegan}
     \end{center}
@@ -303,9 +303,5 @@ The specific operation of the partition training proposed by us is as follows.
 The network layer parameters that need to be trained in the model are grouped according to the function and the number of parameters.
 When training each group of parameters,
     other parameters are fixed and only the parameters in the group are back-propagated.
-In practice, for the overall effect of the model,
-    we generally cross the overall model training and partition training in a certain proportion.
-We set up separate optimizers for each set of parameters if use graph mode.
-Although this will take up more memory for the training device,
-    it can reduce the CPU's burden that the optimizer frequently switches the optimization target and reconstructs the model.
+ 
 
