@@ -76,17 +76,17 @@ In that case, their metrics will be much bigger at the same condition of ours.
     \begin{threeparttable}
     \begin{tabular}{l|ccccc}
         \hline
-        Exp. Name    & Kernel Size & Filter Num.   & Partition          & Norm.         & FID            \\ \hline
-        LittleGAN-Final        & 3x3         & 24x           & $\surd$            & Instance      & 57.94$\pm$0.09 \\
-        LittleGAN-Batch       & 3x3         & 24x           & $\surd$            & Batch         & 59.35$\pm$0.64 \\
-        LittleGAN-16x-Filter   & 3x3         & 16x           & $\surd$            & Instance      & 62.82$\pm$0.40 \\
-        LittleGAN-48x-Filter  & 3x3         & 48x           & $\surd$            & Instance      & 59.35$\pm$0.42 \\
-        LittleGAN-Size-5x5     & 5x5         & 24x           & $\surd$            & Instance      & 56.99$\pm$0.24 \\
-        LittleGAN-No-Partition & 3x3         & 24x           & $\times$           & Instance      & 64.22$\pm$0.46 \\ \hline
-        DCGAN        & 5x5         & 64x           & $\times$           & Batch         & 77.57$\pm$1.27 \\ \hline
-        VAE(64x64)   & -           & -             & $\times$           & -             & 85.7 $\pm$3.8*  \\
-        BEGAN(64x64) & 3x3         & 128x          & $\times$           & -             & 38.9 $\pm$0.9*  \\
-        WGAN-GP(64x64) & 5x5       & 128x          & $\times$           & Batch         & 30.0 $\pm$1.0*  \\ \hline
+        Exp. Name               & Kernel Size   & Filter Num.   & Partition          & Norm.         & FID              \\ \hline
+        LittleGAN-Final         & 3x3           & 24x           & $\surd$            & Instance      & 57.94$\pm$0.09   \\
+        LittleGAN-Batch         & 3x3           & 24x           & $\surd$            & Batch         & 59.35$\pm$0.64   \\
+        LittleGAN-16x-Filter    & 3x3           & 16x           & $\surd$            & Instance      & 62.82$\pm$0.40   \\
+        LittleGAN-48x-Filter    & 3x3           & 48x           & $\surd$            & Instance      & 59.35$\pm$0.42   \\
+        LittleGAN-Size-5x5      & 5x5           & 24x           & $\surd$            & Instance      & 56.99$\pm$0.24   \\
+        LittleGAN-No-Partition  & 3x3           & 24x           & $\times$           & Instance      & 64.22$\pm$0.46   \\ \hline
+        DCGAN                   & 5x5           & 64x           & $\times$           & Batch         & 77.57$\pm$1.27   \\ \hline
+        VAE(64x64)              & -             & -             & $\times$           & -             & 85.7 $\pm$3.8*   \\
+        BEGAN(64x64)            & 3x3           & 128x          & $\times$           & -             & 38.9 $\pm$0.9*   \\
+        WGAN-GP(64x64)          & 5x5           & 128x          & $\times$           & Batch         & 30.0 $\pm$1.0*   \\ \hline
     \end{tabular}
     \begin{tablenotes}
         \item The FID metric comparison between serval models.
@@ -153,12 +153,12 @@ It also means that LittleGAN will get higher real-time performance when deployed
         \begin{threeparttable}
             \begin{tabular}{c|c}
                 \hline
-                Experiment Name & Time       \\ \hline
-                DCGAN        &  11.50s$\pm$0.21s\\
-                LittleGAN-Final        &  3.29s$\pm$0.20s\\
-                LittleGAN-16x-Filter       & 2.02$\pm$0.14s \\
-                LittleGAN-Size-5x5        &  4.85s$\pm$0.07s\\
-                LittleGAN-48x-Filter        & 9.91s$\pm$0.25s  \\ \hline
+                Experiment Name     & Time              \\ \hline
+                DCGAN               & 11.50s$\pm$0.21s  \\
+                LittleGAN-Final     & 3.29s $\pm$0.20s  \\
+                LittleGAN-16x-Filter& 2.02s $\pm$0.14s  \\
+                LittleGAN-Size-5x5  & 4.85s $\pm$0.07s  \\
+                LittleGAN-48x-Filter& 9.91s $\pm$0.25s  \\ \hline
             \end{tabular}
             \begin{tablenotes}
                 \item Generation time of 200 images
@@ -174,7 +174,7 @@ To better measure the convergence speed of LittleGAN and DCGAN\upcite{dcgan},
     we use TensorBoard visualization tool to generate a loss map of the network during training.
 By comparison, it can be found that compared with DCGAN\upcite{dcgan},
     the loss of our network changes more smoothly, the variance is smaller and is steadily decreasing.
-While DCGAN\upcite{dcgan} often appears to have a fitting and lead to a sudden increase in loss.
+While DCGAN\upcite{dcgan} often appears to have a over-fitting and lead to a sudden increase in loss.
 
     \begin{figure}
         \begin{minipage}[t]{0.49\linewidth}
@@ -208,10 +208,10 @@ While DCGAN\upcite{dcgan} often appears to have a fitting and lead to a sudden i
         \end{minipage}
     \end{figure}
 
-Fig.\ref{loss_part_on_d}, Fig.\ref{loss_part_on_g}, and Fig.\ref{loss_part_on_u} show the changes of the loss of each components that turn partition training off.
+Fig.\ref{loss_part_on_d}, Fig.\ref{loss_part_on_g}, and Fig.\ref{loss_part_on_u} show the changes of the loss of each components that turn partition training on.
 Fig.\ref{loss_part_off_d}, Fig.\ref{loss_part_off_g}, and Fig.\ref{loss_part_off_u} show the changes of the loss of each components that turn partition training off.
 It can be seen that the loss of the generator reaches the balance faster with partition training started.
- The loss of the discriminator also has a small amplitude and becomes stable.
+ The loss of the discriminator also has less amplitude and becomes stable more quickly.
 Figure \ref{part_on} and Figure \ref{part_off} show the test output of the partition training on and off.
 After training 20 epochs, with partition training on, image quality is improved under the same training amount.
 These also means that the convergence of LittleGAN is faster than DCGAN at last.

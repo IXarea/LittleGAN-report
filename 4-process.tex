@@ -179,7 +179,6 @@ Then on one hand,  the result turns to the probability indicating that the image
 On the other hand, the result turns to attributes, also normalized to [0,1] using the Sigmoid.
 Figure \ref{net_discriminator} is the structure graph of discriminator network.
 
-% todo: continue here
 As for the discriminator's loss function, since the Sigmoid is used to activate the output,
     in order to ensure that the network parameters will not dead,
     we expect the loss of the discriminator output to [0.02,0.98] instead of [0,1].
@@ -193,8 +192,8 @@ Equation \eqref{loss_d_gan}, Equation \eqref{loss_d_c}, and Equation \eqref{loss
 % Todo: Add comment for equation
 \begin{equation}
     Loss_{D-GAN}(D,G)=
-    \mathbb{E}_{y\thicksim P(data)}[(0.98-D(y))^2]+
-    \mathbb{E}_{c,z\thicksim P(fake)}[D(G(c,z)-0.02)^2]
+    \mathbb{E}_{y\thicksim P(data)}[(D(y)-0.98)^2]+
+    \mathbb{E}_{c,z\thicksim P(fake)}[(D(G(c,z))-0.02)^2]
     \label{loss_d_gan}
 \end{equation}
 
@@ -245,12 +244,12 @@ Our goal is to minimize the loss function of the generator and the discriminator
     so the optimization goal of the generator against the network is Equation \eqref{gan_target}
 
 \begin{equation}
-    GAN^*=\arg \min_{C,D} \max_{G}Loss_{D}(C,D,G)+Loss_{G}(C,D,G)
+    GAN^*=\arg \min_{C,D} \max_{G}[Loss_{D}(C,D,G)+Loss_{G}(C,D,G)]
     \label{gan_target}
 \end{equation}
 
 
-\subsection{Adjustor Network}%todo equivalent
+\subsection{Adjustor Network}
 The adjustor consists of the decoder and the encoder from the GAN as well as several shortcut channels and a combined channel of adjustment conditions.
 It uses the encoder to extract both global and local features.
 Each layer’s features are relayed to the equivalent layer of the decoder network through a shortcut channel.
@@ -292,7 +291,7 @@ Equation \eqref{loss_a_gan}, Equation \eqref{loss_a_l1}, and Equation \eqref{los
     \label{loss_u}
 \end{equation}
 
-\subsection{Model Training}%todo Gradient Clipping instead of gradient penalty 
+\subsection{Model Training}
 There are two main improvements to the training method of the model:
     We apply the gradient penalty\upcite{wgan-gp} to the discriminator, improving the convergence speed and the stability;
     We use the partition training that proposed by us,
