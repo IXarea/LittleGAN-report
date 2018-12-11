@@ -191,23 +191,23 @@ Equation \eqref{loss_d_gan}, Equation \eqref{loss_d_c}, and Equation \eqref{loss
 
 % Todo: Add comment for equation
 \begin{equation}
-    Loss_{D-GAN}(D,G)=
-    \mathbb{E}_{y\thicksim P(data)}[(D(y)-0.98)^2]+
-    \mathbb{E}_{c,z\thicksim P(fake)}[(D(G(c,z))-0.02)^2]
+    \mathcal{L}_{D-GAN}(D,G)=
+    \mathbb{E}_{y\thicksim P_{data}}[(D(y)-0.98)^2]+
+    \mathbb{E}_{c\thicksim P_{data},z\thicksim P_{fake}}[(D(G(c,z))-0.02)^2]
     \label{loss_d_gan}
 \end{equation}
 
 
 \begin{equation}
-    Loss_{C}(C)=
-    \mathbb{E}_{c,y\thicksim P(data)}[(c-C(y))^2]
+    \mathcal{L}_{C}(C)=
+    \mathbb{E}_{c,y\thicksim P_{data}}[(c-C(y))^2]
     \label{loss_d_c}
 \end{equation}
 
 \begin{equation}
-    Loss_{D}(C,D,G)=
-    Loss_{D-GAN}(D,G)+
-    Loss_{C}(C)
+    \mathcal{L}_{D}(C,D,G)=
+    \mathcal{L}_{D-GAN}(D,G)+
+    \mathcal{L}_{C}(C)
     \label{loss_d}
 \end{equation}
 
@@ -221,22 +221,22 @@ Equation \eqref{loss_g_gan}, Equation \eqref{loss_g_l1}, and Equation \eqref{los
 The $\lambda$ in the total loss in the experiment is 0.02.
 
 \begin{equation}
-    Loss_{G-GAN}(C,D,G)=
-    \mathbb{E}_{c,z\thicksim P(fake)}[(0.98-D(G(c,z)))^2]+
-    \mathbb{E}_{c,z\thicksim P(fake)}[(c-C(G(c,z)))^2]
+    \mathcal{L}_{G-GAN}(C,D,G)=
+    \mathbb{E}_{c\thicksim P_{data},z\thicksim P_{fake}}[(0.98-D(G(c,z)))^2]+
+    \mathbb{E}_{c\thicksim P_{data},z\thicksim P_{fake}}[(c-C(G(c,z)))^2]
     \label{loss_g_gan}
 \end{equation}
 
 \begin{equation}
-    Loss_{G-L1}(G)=
-    \mathbb{E}_{c,y,z\thicksim P(data)}[|y-G(c,z)|]
+    \mathcal{L}_{G-L1}(G)=
+    \mathbb{E}_{c,y\thicksim P_{data},z\thicksim P_{fake}}[|y-G(c,z)|]
     \label{loss_g_l1}
 \end{equation}
 
 \begin{equation}
-    Loss_{G}(C,D,G)=
-    Loss_{G-GAN}(C,D,G)+
-    \lambda Loss_{G-L1}(G)
+    \mathcal{L}_{G}(C,D,G)=
+    \mathcal{L}_{G-GAN}(C,D,G)+
+    \lambda \mathcal{L}_{G-L1}(G)
     \label{loss_g}
 \end{equation}
 
@@ -244,7 +244,7 @@ Our goal is to minimize the loss function of the generator and the discriminator
     so the optimization goal of the generator against the network is Equation \eqref{gan_target}
 
 \begin{equation}
-    GAN^*=\arg \min_{C,D} \max_{G}[Loss_{D}(C,D,G)+Loss_{G}(C,D,G)]
+    \arg \min_{C,D} \max_{G}V(C,D,G)=\mathcal{L}_{D}(C,D,G)+\mathcal{L}_{G}(C,D,G)
     \label{gan_target}
 \end{equation}
 
@@ -272,22 +272,22 @@ Equation \eqref{loss_a_gan}, Equation \eqref{loss_a_l1}, and Equation \eqref{los
     mean absolute error loss and total loss of the adjustor, respectively.
 
 \begin{equation}
-    Loss_{A-GAN}(C,D,A)=
-    \mathbb{E}_{c,y\thicksim P(data)}[(0.98-D(A(c,y)))^2]+
-    \mathbb{E}_{c,y\thicksim P(data)}[(c-C(A(c,z)))^2]
+    \mathcal{L}_{A-GAN}(C,D,A)=
+    \mathbb{E}_{c,y\thicksim P_{data}}[(0.98-D(A(c,y)))^2]+
+    \mathbb{E}_{c,y\thicksim P_{data}}[(c-C(A(c,z)))^2]
     \label{loss_a_gan}
 \end{equation}
 
 \begin{equation}
-    Loss_{A-L1}(A)=
-    \mathbb{E}_{c,x,y\thicksim P(data)}[|y-A(c,z)|]
+    \mathcal{L}_{A-L1}(A)=
+    \mathbb{E}_{c,y\thicksim P_{data},z\thicksim P_{fake}}[|y-A(c,z)|]
     \label{loss_a_l1}
 \end{equation}
 
 \begin{equation}
-    Loss_{A}(C,D,A)=
-    Loss_{A-GAN}(C,D,A)+
-    \lambda Loss_{A-L1}(A)
+    \mathcal{L}_{A}(C,D,A)=
+    \mathcal{L}_{A-GAN}(C,D,A)+
+    \lambda \mathcal{L}_{A-L1}(A)
     \label{loss_u}
 \end{equation}
 
